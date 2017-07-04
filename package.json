@@ -2,9 +2,8 @@
   "name": "website-frontend",
   "version": "1.0.0",
   "description": "Website Frontend",
-  "start": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --inline --hot"
   },
   "repository": {
     "type": "git",
@@ -17,6 +16,7 @@
   },
   "homepage": "https://github.com/Monsquaz/website-frontend#readme",
   "dependencies": {
+    "lodash": "^4.17.4",
     "lokka": "^1.7.0",
     "lokka-transport-http": "^1.6.1",
     "vue": "^2.3.4",
@@ -31,9 +31,10 @@
     "babel-runtime": "^5.8.0",
     "css-loader": "^0.23.0",
     "style-loader": "^0.13.0",
-    "vue-hot-reload-api": "^1.2.0",
-    "vue-html-loader": "^1.0.0",
-    "vue-loader": "^7.3.0",
-    "webpack": "^3.0.0"
+    "vue-hot-reload-api": "^2.1.0",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^13.0.0",
+    "vue-template-compiler": "^2.3.4",
+    "webpack": "^2"
   }
 }
