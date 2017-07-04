@@ -1,0 +1,3 @@
+export default {
+  api_uri: 'http://monsquaz.org:3020/graphql'
+};

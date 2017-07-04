@@ -3,12 +3,16 @@ const webpack = require('webpack');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssNano = require('cssnano')
+
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, 'public/js'),
-    publicPath: 'js/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, 'public/assets'),
+    publicPath: 'assets/',
+    filename: 'scripts.js'
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),
@@ -21,7 +25,12 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+      compress: { warnings: false },
+    }),
+    new ExtractTextPlugin("style.css"),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      cssProcessor: CssNano ,
     })
   ],
   module: {
@@ -33,7 +42,10 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
       }
     ]
   }
