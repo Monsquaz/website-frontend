@@ -1,14 +1,25 @@
 <template>
-<div class="message">{{ msg }}</div>
+<div class="app">
+  <router-view></router-view>
+</div>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      msg: 'Hello from vue-loader!'
+import VueRouter from 'vue-router';
+import Page from './page.vue';
+
+var router = new VueRouter({
+  mode: 'hash',
+  routes: [
+    {
+      path: '*',
+      component: Page
     }
-  }
+  ]
+});
+export default {
+  name: 'app',
+  router
 }
 </script>
 
