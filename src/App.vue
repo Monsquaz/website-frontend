@@ -6,7 +6,7 @@
 
 <script>
 import VueRouter from 'vue-router';
-import Page from './page.vue';
+import Page from './Page.vue';
 
 var router = new VueRouter({
   mode: 'hash',

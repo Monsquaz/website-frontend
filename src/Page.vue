@@ -1,9 +1,9 @@
 <template>
-  <div class="page">
-    <h1>{{ path }}</h1>
-    <p v-if="page">Page: {{ JSON.stringify(page) }}</p>
-    <p v-else>Nope</p>
-  </div>
+  <component
+    :is="layoutComponent"
+    v-bind:type-component="typeComponent"
+    v-bind:content="content">
+  </component>
 </template>
 
 <script>
@@ -15,11 +15,15 @@ let reactToRouteChange = (instance, from, to) => {
 }
 
 const Page = {
+  name: 'page',
   data () {
     return {
       path: '',
       page: null,
-      graphQLUpdateRequested: false
+      graphQLUpdateRequested: false,
+      layoutComponent: 'basic-layout',
+      typeComponent: 'basic-type',
+      content: 'test'
     }
   },
   apollo: {
@@ -34,6 +38,7 @@ const Page = {
       update(pages) {
         if(pages.length == 0) {
           // TODO: Go to 404 page!
+          console.warn('404 :(');
         }
         return pages[0];
       },
