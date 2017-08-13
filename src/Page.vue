@@ -24,7 +24,9 @@ const Page = {
       page: null,
       graphQLUpdateRequested: false,
       layoutComponent: 'basic-layout',
+      layoutData: {},
       typeComponent: 'basic-type',
+      typeData: {},
       content: 'test'
     }
   },

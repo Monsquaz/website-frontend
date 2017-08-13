@@ -17,6 +17,9 @@ const BasicLayout = {
     typeComponent: {
       type: String
     },
+    typeData: {
+      type: Object
+    },
     content: {
       type: String
     }

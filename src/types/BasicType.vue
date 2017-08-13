@@ -10,6 +10,9 @@
 const BasicType = {
   name: 'basic-type',
   props: {
+    typeData: {
+      type: Object
+    },
     content: {
       type: String
     }

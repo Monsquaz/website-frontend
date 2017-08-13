@@ -10,13 +10,20 @@ import VueApollo from 'vue-apollo';
 import VueRouter from 'vue-router';
 import Config from '../config.js';
 
-const Page        = () => import(/* webpackChunkName: "page" */ './Page.vue');
-const BasicLayout = () => import(/* webpackChunkName: "basic-layout" */ './layouts/BasicLayout.vue');
-const BasicType   = () => import(/* webpackChunkName: "basic-type" */ './types/BasicType.vue');
+Vue.component('page', () => import(
+  /* webpackChunkName: "page" */
+  './Page.vue'
+));
 
-Vue.component('page', Page);
-Vue.component('basic-layout', BasicLayout);
-Vue.component('basic-type', BasicType);
+Vue.component('basic-layout', () => import(
+  /* webpackChunkName: "basic-layout" */
+  './layouts/BasicLayout.vue'
+));
+
+Vue.component('basic-type', () => import(
+  /* webpackChunkName: "basic-type" */
+  './types/BasicType.vue'
+));
 
 Vue.use(VueRouter);
 Vue.use(VueApollo);

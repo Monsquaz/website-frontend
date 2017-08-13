@@ -6,14 +6,17 @@
 
 <script>
 import VueRouter from 'vue-router';
-import Page from './Page.vue';
+
 
 var router = new VueRouter({
   mode: 'hash',
   routes: [
     {
       path: '*',
-      component: Page
+      component: () => import(
+        /* webpackChunkName: "page" */
+        './Page.vue'
+      )
     }
   ]
 });
