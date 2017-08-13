@@ -9,24 +9,24 @@ export default {
       for(i_descendant in tree) {
         var isAncestor = false;
         for(i_ancestor in tree) {
-          if(tree[i_descendant].descendant == tree[i_ancestor].ancestor) {
+          if(tree[i_descendant].descendant.id == tree[i_ancestor].ancestor.id) {
             isAncestor = true;
           }
         }
         if(!isAncestor) {
-          if(   tree[i_descendant].ancestor in itemsById
-            &&  tree[i_descendant].descendant in itemsById
+          if(   tree[i_descendant].ancestor.id in itemsById
+            &&  tree[i_descendant].descendant.id in itemsById
           ) {
-            if(!itemsById[tree[i_descendant].ancestor].children) {
-              itemsById[tree[i_descendant].ancestor].children =
-                [itemsById[tree[i_descendant].descendant]];
+            if(!itemsById[tree[i_descendant].ancestor.id].children) {
+              itemsById[tree[i_descendant].ancestor.id].children =
+                [itemsById[tree[i_descendant].descendant.id]];
             } else {
-              itemsById[tree[i_descendant].ancestor].children.push(
-                itemsById[tree[i_descendant].descendant]
+              itemsById[tree[i_descendant].ancestor.id].children.push(
+                itemsById[tree[i_descendant].descendant.id]
               );
             }
           }
-          delete itemsById[tree[i_descendant].descendant];
+          delete itemsById[tree[i_descendant].descendant.id];
           if(tree.length == 1) {
             return Object.values(itemsById);
           }

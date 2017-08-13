@@ -1,7 +1,9 @@
 <template>
   <component
     :is="layoutComponent"
+    v-bind:layout-data="layoutData"
     v-bind:type-component="typeComponent"
+    v-bind:type-data="typeData"
     v-bind:content="content">
   </component>
 </template>
@@ -38,8 +40,16 @@ const Page = {
       update(pages) {
         if(pages.length == 0) {
           // TODO: Go to 404 page!
+          // this.$router.push('/404')
+          // this.$route.router.go('/404');
           console.warn('404 :(');
         }
+        /*
+          TODO: Identify which language the user is visiting based on
+          the matched slug, and later use that to display the content in the correct language.
+          + add a language switcher if the page has content in other languages
+
+        */
         return pages[0];
       },
       result() {

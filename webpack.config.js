@@ -12,7 +12,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public/assets'),
     publicPath: 'assets/',
-    filename: 'scripts.js'
+    filename: 'scripts.js',
+    chunkFilename: '[name].bundle.js'
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),

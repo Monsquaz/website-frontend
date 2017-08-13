@@ -3,6 +3,7 @@
     <p>Basic layout</p>
     <component
       :is="typeComponent"
+      v-bind:type-data="typeData"
       v-bind:content="content">
     </component>
   </div>
@@ -21,8 +22,6 @@ const BasicLayout = {
     }
   },
   data () {
-    console.warn('test1', this.typeComponent);
-    console.warn('test2', this.content);
     return {}
   },
   apollo: {
