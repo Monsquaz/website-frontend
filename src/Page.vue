@@ -4,8 +4,8 @@
       v-if="page && !isError"
       :is="page.layoutView.type.component"
       v-bind:page="page" />
-    <loading-layout v-if="isLoading && !isError" />
-    <error-page v-if="isError" />
+    <loading-layout v-else-if="isLoading && !isError" />
+    <error-page v-else-if="isError" />
   </div>
 </template>
 
