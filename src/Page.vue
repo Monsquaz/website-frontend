@@ -135,4 +135,20 @@ const Page = {
 export default Page;
 </script>
 
-<style></style>
+<style lang="sass">
+
+  @import 'scss/all';
+
+  .layout-view {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+
+    &.green {
+      background: linear-gradient(to bottom,  #a8fdd1 0%,#2efd94 50%,#003214 100%) no-repeat center center fixed;
+      background-size: cover;
+    }
+
+  }
+</style>

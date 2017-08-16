@@ -28,9 +28,16 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
     }),
-    new ExtractTextPlugin("style.css"),
+    new ExtractTextPlugin({ filename: "style.css", allChunks: true }),
     new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: { discardComments: { removeAll: true } },
+      cssProcessorOptions: {
+        discardComments: {
+          removeAll: true
+        },
+        autoprefixer: {
+          browsers: 'last 2 versions'
+        }
+      },
       cssProcessor: CssNano ,
     })
   ],
@@ -58,12 +65,6 @@ module.exports = {
                   loader: 'sass-loader',
                   options: {
                     minimize: true
-                  }
-                },
-                {
-                  loader: 'autoprefixer-loader',
-                  options: {
-                    browsers: 'last 2 versions'
                   }
                 }
               ],
