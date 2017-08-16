@@ -39,6 +39,11 @@ Vue.component('article-type', () => import(
   './types/ArticleType.vue'
 ));
 
+Vue.component('error-page', () => import(
+  /* webpackChunkName: "error-page" */
+  './ErrorPage.vue'
+));
+
 /* Other components       */
 /* ---------------------- */
 Vue.component('horizontal-menu', () => import(

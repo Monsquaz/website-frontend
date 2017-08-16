@@ -1,8 +1,12 @@
 <template>
-  <component
-    :is="page ? page.layoutView.type.component : 'loading-layout'"
-    v-bind:page="page">
-  </component>
+  <div class="page">
+    <component
+      v-if="page && !isError"
+      :is="page.layoutView.type.component"
+      v-bind:page="page" />
+    <loading-layout v-if="isLoading && !isError" />
+    <error-page v-if="isError" />
+  </div>
 </template>
 
 <script>
@@ -20,6 +24,8 @@ const Page = {
       path: '',
       page: null,
       skipQuery: false,
+      isLoading: true,
+      isError: false
     }
   },
   apollo: {
@@ -78,6 +84,9 @@ const Page = {
             }
           }`
         },
+        watchLoading(isLoading, countModifier) {
+          this.isLoading = isLoading;
+        },
         update({ pages }) {
           if(pages.length == 0) {
             // TODO: Go to 404 page!
@@ -98,6 +107,10 @@ const Page = {
         },
         result() {
           this.skipQuery = true;
+        },
+        error(error) {
+          // TODO: Show some service is down component
+          this.isError = true;
         },
         variables: {
           path: '/'
