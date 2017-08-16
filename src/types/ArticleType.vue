@@ -1,20 +1,23 @@
 <template>
   <div class="type-view">
     <p>Article type</p>
-    <p>Content: {{ content }}</p>
+    <p>{{ content }}</p>
   </div>
 </template>
 
 <script>
 
+import Util from '../Util';
+
 const ArticleType = {
   name: 'article-type',
   props: {
-    typeData: { type: Object },
-    content:  { type: Array }
+    page: { type: Object }
   },
   data () {
-    return {}
+    return {
+      content: Util.getTranslation(this.page.content, 'en') // TODO: use lang from vuex state
+    }
   },
   apollo: {
 

@@ -1,11 +1,10 @@
 <template>
   <div class="layout-view">
-    <p>Overview layout</p>
-    <component
-      :is="typeComponent"
-      v-bind:type-data="typeData"
-      v-bind:content="content">
-    </component>
+    <horizontal-menu></horizontal-menu>
+    <vertical-menu></vertical-menu>
+    <component :is="page.typeView.type.component" v-bind:page="page"></component>
+    <vertical-menu></vertical-menu>
+    <footer></footer>
   </div>
 </template>
 
@@ -14,10 +13,7 @@
 const OverviewLayout = {
   name: 'loading-layout',
   props: {
-    layoutData:     { type: Object },
-    typeComponent:  { type: String },
-    typeData:       { type: Object },
-    content:        { type: Array  }
+    page: { type: Object }
   },
   data () {
     return {}

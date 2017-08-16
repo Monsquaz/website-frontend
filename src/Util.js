@@ -39,9 +39,17 @@ export default {
   },
   mapTranslations: (data) => {
     let result = {};
-    for(translation of data) {
+    for(let translation of data) {
       result[translation.lang] = translation.content;
     }
     return result;
-  };
+  },
+  getTranslation: (data, lang) => {
+    for(let translation of data) {
+      if(translation.lang == lang) {
+        return translation.content;
+      }
+    }
+    return null;
+  }
 }

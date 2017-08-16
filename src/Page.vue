@@ -1,10 +1,7 @@
 <template>
   <component
-    :is="layoutComponent"
-    v-bind:layout-data="layoutData"
-    v-bind:type-component="typeComponent"
-    v-bind:type-data="typeData"
-    v-bind:content="content">
+    :is="page ? page.layoutView.type.component : 'loading-layout'"
+    v-bind:page="page">
   </component>
 </template>
 
@@ -23,11 +20,6 @@ const Page = {
       path: '',
       page: null,
       skipQuery: false,
-      layoutComponent: 'loading-layout',
-      layoutData: {},
-      typeComponent: 'loading-type',
-      typeData: {},
-      content: []
     }
   },
   apollo: {
@@ -97,16 +89,15 @@ const Page = {
             TODO: Identify which language the user is visiting based on
             the matched slug, and later use that to display the content in the correct language.
             + add a language switcher if the page has content in other languages
+
+            UNTIL THIS IS DONE, WE COULD ASSUME THE LANGUAGE IS 'en' EVERYWHERE
+
+            TODO: Use vuex for that!
           */
           return pages[0];
         },
         result() {
           this.skipQuery = true;
-          this.layoutComponent = this.page.layoutView.type.component;
-          this.layoutData = JSON.parse(this.page.layoutView.data);
-          this.typeComponent = this.page.typeView.type.component;
-          this.typeData = JSON.parse(this.page.typeView.data);
-          this.content = this.page.content;
         },
         variables: {
           path: '/'

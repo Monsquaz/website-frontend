@@ -15,7 +15,8 @@ Vue.component('page', () => import(
   './Page.vue'
 ));
 
-/* Components for testing */
+/* Latouts and types for testing */
+/* ---------------------- */
 Vue.component('loading-layout', () => import(
   /* webpackChunkName: "loading-layout" */
   './layouts/LoadingLayout.vue'
@@ -27,6 +28,7 @@ Vue.component('loading-type', () => import(
 ));
 
 /* Real layouts and types */
+/* ---------------------- */
 Vue.component('overview-layout', () => import(
   /* webpackChunkName: "overview" */
   './layouts/OverviewLayout.vue'
@@ -35,6 +37,23 @@ Vue.component('overview-layout', () => import(
 Vue.component('article-type', () => import(
   /* webpackChunkName: "article" */
   './types/ArticleType.vue'
+));
+
+/* Other components       */
+/* ---------------------- */
+Vue.component('horizontal-menu', () => import(
+  /* webpackChunkName: "horizontal-menu" */
+  './components/HorizontalMenu.vue'
+));
+
+Vue.component('vertical-menu', () => import(
+  /* webpackChunkName: "horizontal-menu" */
+  './components/VerticalMenu.vue'
+));
+
+Vue.component('footer', () => import(
+  /* webpackChunkName: "horizontal-menu" */
+  './components/Footer.vue'
 ));
 
 Vue.use(VueRouter);

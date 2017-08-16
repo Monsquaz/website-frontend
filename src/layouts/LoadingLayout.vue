@@ -7,12 +7,9 @@
 <script>
 
 const LoadingLayout = {
-  name: 'basic-layout',
+  name: 'loading-layout',
   props: {
-    layoutData:     { type: Object },
-    typeComponent:  { type: String },
-    typeData:       { type: Object },
-    content:        { type: Array  }
+    page: { type: Object },
   },
   data () {
     return {}
@@ -26,5 +23,4 @@ export default LoadingLayout ;
 </script>
 
 <style lang="sass">
-
 </style>
