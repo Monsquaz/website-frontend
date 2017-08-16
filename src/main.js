@@ -15,14 +15,26 @@ Vue.component('page', () => import(
   './Page.vue'
 ));
 
-Vue.component('basic-layout', () => import(
-  /* webpackChunkName: "basic-layout" */
-  './layouts/BasicLayout.vue'
+/* Components for testing */
+Vue.component('loading-layout', () => import(
+  /* webpackChunkName: "loading-layout" */
+  './layouts/LoadingLayout.vue'
 ));
 
-Vue.component('basic-type', () => import(
+Vue.component('loading-type', () => import(
   /* webpackChunkName: "basic-type" */
-  './types/BasicType.vue'
+  './types/LoadingType.vue'
+));
+
+/* Real layouts and types */
+Vue.component('overview-layout', () => import(
+  /* webpackChunkName: "overview" */
+  './layouts/OverviewLayout.vue'
+));
+
+Vue.component('article-type', () => import(
+  /* webpackChunkName: "article" */
+  './types/ArticleType.vue'
 ));
 
 Vue.use(VueRouter);
@@ -33,6 +45,7 @@ const apolloClient = new ApolloClient({
     uri: Config.api_uri,
     transportBatching: true,
   }),
+  ssrForceFetchDelay: 100,
   connectToDevTools: true,
 });
 

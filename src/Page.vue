@@ -22,47 +22,99 @@ const Page = {
     return {
       path: '',
       page: null,
-      graphQLUpdateRequested: false,
-      layoutComponent: 'basic-layout',
+      skipQuery: false,
+      layoutComponent: 'loading-layout',
       layoutData: {},
-      typeComponent: 'basic-type',
+      typeComponent: 'loading-type',
       typeData: {},
-      content: 'test'
+      content: []
     }
   },
   apollo: {
-    page: {
-      query: () => {
-        return gql`query fetchPage ($path: String!) {
-          pages(path: $path) {
-            id
+    page () {
+      return {
+        query: () => {
+          return gql`query fetchPage ($path: String!) {
+            pages(path: $path) {
+              category {
+                title {
+                  lang
+                  content
+                }
+              },
+              tags {
+                name {
+                  lang
+                  content
+                }
+              },
+              canonical {
+                paths {
+                  lang
+                  path
+                }
+              },
+              comments,
+              layoutView {
+                type {
+                  component
+                },
+                data
+              },
+              typeView {
+                type {
+                  component
+                },
+                data
+              },
+              slug {
+                lang
+                content
+              },
+              title {
+                lang
+                content
+              },
+              content {
+                lang
+                content
+              },
+              paths {
+                lang
+                path
+              }
+            }
+          }`
+        },
+        update({ pages }) {
+          if(pages.length == 0) {
+            // TODO: Go to 404 page!
+            // this.$router.push('/404')
+            // this.$route.router.go('/404');
+            console.warn('404 :(');
           }
-        }`
-      },
-      update(pages) {
-        if(pages.length == 0) {
-          // TODO: Go to 404 page!
-          // this.$router.push('/404')
-          // this.$route.router.go('/404');
-          console.warn('404 :(');
+          /*
+            TODO: Identify which language the user is visiting based on
+            the matched slug, and later use that to display the content in the correct language.
+            + add a language switcher if the page has content in other languages
+          */
+          return pages[0];
+        },
+        result() {
+          this.skipQuery = true;
+          this.layoutComponent = this.page.layoutView.type.component;
+          this.layoutData = JSON.parse(this.page.layoutView.data);
+          this.typeComponent = this.page.typeView.type.component;
+          this.typeData = JSON.parse(this.page.typeView.data);
+          this.content = this.page.content;
+        },
+        variables: {
+          path: '/'
+        },
+        skip: () => {
+          return this.skipQuery;
         }
-        /*
-          TODO: Identify which language the user is visiting based on
-          the matched slug, and later use that to display the content in the correct language.
-          + add a language switcher if the page has content in other languages
-
-        */
-        return pages[0];
-      },
-      result() {
-        Page.graphQLUpdateRequested = false;
-      },
-      variables: {
-        path: '/'
-      },
-      skip: () => {
-        return !Page.graphQLUpdateRequested;
-      }
+      };
     }
   },
   beforeRouteEnter (to, from, next) {
