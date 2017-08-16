@@ -26,4 +26,5 @@ export default LoadingLayout ;
 </script>
 
 <style lang="sass">
+
 </style>

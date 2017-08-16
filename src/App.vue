@@ -7,7 +7,6 @@
 <script>
 import VueRouter from 'vue-router';
 
-
 var router = new VueRouter({
   mode: 'hash',
   routes: [
@@ -27,8 +26,3 @@ export default {
 </script>
 
 <style lang="scss" src="bulma"></style>
-<style>
-.message {
-  color: blue;
-}
-</style>
