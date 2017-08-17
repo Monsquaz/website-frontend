@@ -1,6 +1,5 @@
 <template>
   <div class="type-view">
-    <p>Article type</p>
     <p>{{ content }}</p>
   </div>
 </template>

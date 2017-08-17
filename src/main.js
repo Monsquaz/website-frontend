@@ -52,13 +52,23 @@ Vue.component('horizontal-menu', () => import(
 ));
 
 Vue.component('vertical-menu', () => import(
-  /* webpackChunkName: "horizontal-menu" */
+  /* webpackChunkName: "vertical-menu" */
   './components/VerticalMenu.vue'
 ));
 
-Vue.component('footer', () => import(
-  /* webpackChunkName: "horizontal-menu" */
-  './components/Footer.vue'
+Vue.component('monsquaz-footer', () => import(
+  /* webpackChunkName: "monsquaz-footer" */
+  './components/MonsquazFooter.vue'
+));
+
+Vue.component('green-arrows', () => import(
+  /* webpackChunkName: "green-arrows" */
+  './components/GreenArrows.vue'
+));
+
+Vue.component('breadcrumbs', () => import(
+  /* webpackChunkName: "breadcrumbs" */
+  './components/Breadcrumbs.vue'
 ));
 
 Vue.use(VueRouter);

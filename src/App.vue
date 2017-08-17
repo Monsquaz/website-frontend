@@ -25,4 +25,6 @@ export default {
 }
 </script>
 
-<style lang="scss" src="bulma"></style>
+<style lang="sass">
+  @import 'scss/all';
+</style>

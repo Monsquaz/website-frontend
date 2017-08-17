@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import Util from './Util';
 import gql from 'graphql-tag';
 
 let reactToRouteChange = (instance, from, to) => {
@@ -107,6 +108,7 @@ const Page = {
         },
         result() {
           this.skipQuery = true;
+          document.title = Util.getTranslation(this.page.title, 'en'); // TODO
         },
         error(error) {
           // TODO: Show some service is down component
@@ -136,8 +138,6 @@ export default Page;
 </script>
 
 <style lang="sass">
-
-  @import 'scss/all';
 
   .layout-view {
     padding: 0;

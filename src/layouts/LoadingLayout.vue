@@ -26,9 +26,6 @@ export default LoadingLayout ;
 </script>
 
 <style lang="sass">
-  
-  $size: 150px;
-
   @-webkit-keyframes lds-ripple {
     0% {
       top: 90px;
