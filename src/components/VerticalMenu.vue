@@ -53,4 +53,8 @@ const VerticalMenu = {
 export default VerticalMenu;
 </script>
 
-<style lang="sass"></style>
+<style lang="sass" scoped>
+  .menu {
+    padding: 5px;
+  }
+</style>

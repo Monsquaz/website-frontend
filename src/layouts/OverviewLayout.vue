@@ -1,6 +1,6 @@
 <template>
   <div class="layout-view green">
-    <div class="container content">
+    <div class="container contents">
       <div class="columns">
         <div v-if="hasTopMenu" class="column is-12">
           <horizontal-menu class="top-menu"></horizontal-menu>
@@ -10,25 +10,19 @@
         <div v-if="hasLeftMenu" class="column is-2">
           <vertical-menu class="left-menu"></vertical-menu>
         </div>
-
         <div class="column" v-bind:class="{
           'is-8': hasLeftMenu && hasRightMenu,
           'is-10': (!hasLeftMenu && hasRightMenu) || (hasLeftMenu && !hasRightMenu),
           'is-12': !(hasLeftMenu || hasRightMenu),
         }">
           <div class="columns">
-            <div class="column is-12 breadcrumbs">
-              <breadcrumbs v-bind:page="page"></breadcrumbs>
-            </div>
-          </div>
-          <div class="columns">
             <div class="column is-12 type-content">
-              <h1>{{ title }}</h1>
+              <breadcrumbs v-bind:page="page" class="breadcrumbs"></breadcrumbs>
+              <h1 class="page-title">{{ title }}</h1>
               <component :is="page.typeView.type.component" v-bind:page="page"></component>
             </div>
           </div>
         </div>
-
         <div v-if="hasRightMenu" class="column is-2">
           <vertical-menu class="right-menu"></vertical-menu>
         </div>
@@ -87,19 +81,27 @@ export default OverviewLayout ;
     @extend %blob;
     margin-top: 15px;
   }
-  .breadcrumbs {
-    @extend %blob;
-  }
   .layout-view {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
   }
-  .content {
+  .contents {
     flex: 1;
     margin-top: 15px;
   }
   .footer {
     border-top: 1px solid black;
+    background: linear-gradient(to bottom,  #a8fdd1 0%,#2efd94 25%,#003214 100%) no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+  }
+  .page-title {
+    font-size: 30px;
+    border-bottom: 1px solid #c0c0c0;
+    margin-bottom: 15px;
+  }
+  .breadcrumbs {
+
   }
 </style>

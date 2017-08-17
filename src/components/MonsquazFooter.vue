@@ -2,7 +2,9 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <strong>Monsquaz.org</strong>
+        <div class="scrolling">
+          You are anus! You need more Monsquaz!
+        </div>
       </div>
     </div>
   </footer>
@@ -27,5 +29,14 @@ export default MonsquazFooter;
 </script>
 
 <style lang="sass" scoped>
-  .footer {}
+  .footer {
+    .scrolling {
+       animation: marquee 5s ease-in-out infinite;
+    }
+  }
+  @keyframes marquee {
+    0%   { text-indent: 250px }
+    50% { text-indent: -250px }
+    100%   { text-indent: 250px }
+  }
 </style>

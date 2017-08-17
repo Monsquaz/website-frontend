@@ -14,13 +14,13 @@
           <i class="fa fa-twitter"></i>
         </span>
       </a>
-      <div class="navbar-burger burger" data-target="navMenubd-example">
+      <div class="navbar-burger burger" v-on:click="isActive = !isActive">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
-    <div id="navMenubd-example" class="navbar-menu">
+    <div id="navMenubd-example" class="navbar-menu" v-bind:class="{'is-active': isActive}">
       <div class="navbar-start">
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link  is-active" href="/documentation/overview/start/">
@@ -146,16 +146,6 @@
         </div>
       </div>
       <div class="navbar-end">
-        <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
-          <span class="icon" style="color: #333;">
-            <i class="fa fa-github"></i>
-          </span>
-        </a>
-        <a class="navbar-item is-hidden-desktop-only" href="https://twitter.com/jgthms" target="_blank">
-          <span class="icon" style="color: #55acee;">
-            <i class="fa fa-twitter"></i>
-          </span>
-        </a>
       </div>
     </div>
   </nav>
@@ -169,7 +159,9 @@ const HorizontalMenu = {
   name: 'horizontal-menu',
   props: {},
   data () {
-    return {};
+    return {
+      isActive: false
+    };
   },
   apollo: {
 
