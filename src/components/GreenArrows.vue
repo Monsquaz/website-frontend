@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="arrows-container">
     <div class="x1"></div>
     <div class="x2"></div>
     <div class="x3"></div>
@@ -41,9 +41,19 @@ export default Footer;
 </script>
 
 <style lang="sass" scoped>
+  .arrows-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
   %arrow {
     position: absolute;
-    /* background-image: url("./images/green-arrow.png"); */
+    background-image: url("/images/green-arrow.png");
     width: 125px;
     height: 150px;
     top: -150px;

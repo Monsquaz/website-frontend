@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <green-arrows></green-arrows>
     <monsquaz-footer class="footer"></monsquaz-footer>
   </div>
 </template>
@@ -89,12 +90,15 @@ export default OverviewLayout ;
   .contents {
     flex: 1;
     margin-top: 15px;
+    z-index: 1;
   }
   .footer {
+    margin-top: 15px;
     border-top: 1px solid black;
     background: linear-gradient(to bottom,  #a8fdd1 0%,#2efd94 25%,#003214 100%) no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
+    opacity: 0.9;
   }
   .page-title {
     font-size: 30px;

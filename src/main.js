@@ -46,6 +46,10 @@ Vue.component('error-page', () => import(
 
 /* Other components       */
 /* ---------------------- */
+import 'vue-awesome/icons'; // TODO: We don't have to import all.
+import Icon from 'vue-awesome/components/Icon.vue'
+Vue.component('icon', Icon); // Font awesome
+
 Vue.component('horizontal-menu', () => import(
   /* webpackChunkName: "horizontal-menu" */
   './components/HorizontalMenu.vue'
