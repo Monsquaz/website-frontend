@@ -1,6 +1,6 @@
 <template>
-  <div>
-    Error page
+  <div class="layout-view green">
+    <h1>An error was encountered. Try again later!</h1>
   </div>
 </template>
 
@@ -20,4 +20,14 @@ const ErrorPage = {
 export default ErrorPage;
 </script>
 
-<style lang="sass"></style>
+<style lang="sass" scoped>
+  h1 {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 20px;
+  }
+  .layout-view {
+    width: 100vw;
+    height: 100vh;
+  }
+</style>

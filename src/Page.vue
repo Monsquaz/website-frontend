@@ -5,7 +5,7 @@
       :is="page.layoutView.type.component"
       v-bind:page="page" />
     <loading-layout v-else-if="isLoading && !isError" />
-    <error-page v-else-if="isError" />
+    <error-page v-else-if="isError" v-bind:="error" />
   </div>
 </template>
 
@@ -27,7 +27,8 @@ const Page = {
       page: null,
       skipQuery: false,
       isLoading: true,
-      isError: false
+      isError: false,
+      error: ''
     }
   },
   apollo: {
@@ -36,6 +37,7 @@ const Page = {
         query: () => {
           return gql`query ($path: String!) {
             pages(path: $path) {
+              id,
               category {
                 title {
                   lang

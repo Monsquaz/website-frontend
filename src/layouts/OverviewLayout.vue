@@ -21,6 +21,17 @@
               <component :is="page.typeView.type.component" v-bind:page="page"></component>
             </div>
           </div>
+          <div class="columns" v-if="page.comments">
+            <div class="column is-12 comments" >
+              <h2 class="sub-heading">Comments</h2>
+              <disqus
+                class="disqus"
+                shortname="monsquaz"
+                v-bind:identifier="String(page.id)"
+                v-bind:title="title">
+              </disqus>
+            </div>
+          </div>
         </div>
         <div v-if="hasRight" class="column is-2">
           <vertical-menu class="right-menu"></vertical-menu>
@@ -38,7 +49,7 @@ import Util from '../Util';
 import Vue from 'vue';
 
 const OverviewLayout = {
-  name: 'loading-layout',
+  name: 'overview-layout',
   props: {
     page: { type: Object }
   },
@@ -86,12 +97,15 @@ export default OverviewLayout ;
     @extend %blob;
   }
   /* Weirdness-hacks-etc */
-    .type-content {
+    %center-content {
       margin-top: 12px; /* Why not 15px I dont know */
       &.is-12 {
         width: calc(100% - 24px);
         margin-left: 12px;
       }
+    }
+    .type-content {
+      @extend %center-content;
     }
   /* End weirdness */
   .layout-view {
@@ -116,15 +130,30 @@ export default OverviewLayout ;
     color: #ffffff;
     opacity: 0.9;
   }
-  .page-title {
+  %heading {
     font-size: 30px;
     border-bottom: 1px solid #c0c0c0;
     margin-bottom: 15px;
+  }
+  .page-title {
+    @extend %heading;
+  }
+  .sub-heading {
+    @extend %heading;
   }
   .breadcrumbs {
 
   }
   .sharers  {
     cursor: pointer;
+  }
+  .comments {
+    @extend %blob;
+    @extend %center-content;
+    margin-top: 15px;
+  }
+  .disqus {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 </style>

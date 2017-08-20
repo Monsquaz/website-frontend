@@ -129,7 +129,9 @@ Validator.extend('password', {
   validate: value => strength(value) >= 2
 });
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+  locale: 'sv'
+});
 
 const UserRegistration = {
   name: 'user-registration',

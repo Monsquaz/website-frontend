@@ -25,41 +25,47 @@ const LoadingLayout = {
 export default LoadingLayout ;
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
+  .layout-view {
+    width: 100vw;
+    height: 100vh;
+  }
   @-webkit-keyframes lds-ripple {
     0% {
-      top: 90px;
-      left: 90px;
+      top: 180px;
+      left: 180px;
       width: 0;
       height: 0;
       opacity: 1;
     }
     100% {
-      top: 15px;
-      left: 15px;
-      width: 150px;
-      height: 150px;
+      top: 30px;
+      left: 30px;
+      width: 300px;
+      height: 300px;
       opacity: 0;
     }
   }
   @keyframes lds-ripple {
     0% {
-      top: 90px;
-      left: 90px;
+      top: 180px;
+      left: 180px;
       width: 0;
       height: 0;
       opacity: 1;
     }
     100% {
-      top: 15px;
-      left: 15px;
-      width: 150px;
-      height: 150px;
+      top: 30px;
+      left: 30px;
+      width: 300px;
+      height: 300px;
       opacity: 0;
     }
   }
   .lds-ripple {
-    position: relative;
+    position: fixed;
+    top: calc(50vh - 150px);
+    left: calc(50vw - 150px);
   }
   .lds-ripple div {
     box-sizing: content-box;

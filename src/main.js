@@ -69,6 +69,9 @@ Vue.component('user-registration', () => import(
 import Icon from 'vue-awesome/components/Icon.vue'
 Vue.component('icon', Icon); // Font awesome
 
+import VueDisqus from 'vue-disqus/VueDisqus.vue';
+Vue.component('disqus', VueDisqus); // Disqus
+
 Vue.component('horizontal-menu', () => import(
   /* webpackChunkName: "horizontal-menu" */
   './components/HorizontalMenu.vue'
