@@ -24,11 +24,14 @@
     "lodash": "^4.17.4",
     "lokka": "^1.7.0",
     "lokka-transport-http": "^1.6.1",
+    "strength": "^0.1.4",
     "url-loader": "^0.5.9",
+    "vee-validate": "^2.0.0-beta.17",
     "vue": "^2.3.4",
     "vue-apollo": "^2.1.0-beta.18",
     "vue-awesome": "^2.3.1",
-    "vue-router": "^2.7.0"
+    "vue-router": "^2.7.0",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.1.2",
@@ -48,6 +51,7 @@
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^13.0.0",
     "vue-template-compiler": "^2.3.4",
-    "webpack": "^2"
+    "webpack": "^2",
+    "webpack-bundle-size-analyzer": "^2.7.0"
   }
 }

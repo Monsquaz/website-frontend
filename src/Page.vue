@@ -12,17 +12,18 @@
 <script>
 import Util from './Util';
 import gql from 'graphql-tag';
+import Config from '../config';
 
 let reactToRouteChange = (instance, from, to) => {
   instance.path = to.path;
-  instance.graphQLUpdateRequested = true;
+  instance.skipQuery = false;
 }
 
 const Page = {
   name: 'page',
   data () {
     return {
-      path: '',
+      path: '/',
       page: null,
       skipQuery: false,
       isLoading: true,
@@ -33,7 +34,7 @@ const Page = {
     page () {
       return {
         query: () => {
-          return gql`query fetchPage ($path: String!) {
+          return gql`query ($path: String!) {
             pages(path: $path) {
               category {
                 title {
@@ -41,6 +42,24 @@ const Page = {
                   content
                 }
               },
+              categoriesBreadcrumbs {
+                id, depth, ancestor {
+                  id, title {
+                    lang
+                    content
+                  },
+                  page {
+                    title {
+                      lang
+                      content
+                    }
+                    slug {
+                      lang
+                      content
+                    }
+                  }
+                },
+              }
               tags {
                 name {
                   lang
@@ -109,14 +128,23 @@ const Page = {
         result() {
           this.skipQuery = true;
           document.title = Util.getTranslation(this.page.title, 'en'); // TODO
+          // TODO: Save element so it doesn't have to be queried next time?
+          let canonical = document.querySelector('link[rel="canonical"]');
+          if(this.page.canonical) {
+            canonical.href = Config.baseUri
+              + Util.getTranslation(this.page.canonical.paths, 'en', 'path');
+          } else {
+            canonical.href = Config.baseUri
+              + Util.getTranslation(this.page.paths, 'en', 'path');
+          }
         },
         error(error) {
           // TODO: Show some service is down component
           this.isError = true;
         },
-        variables: {
-          path: '/'
-        },
+        variables: () => ({
+          path: this.path
+        }),
         skip: () => {
           return this.skipQuery;
         }

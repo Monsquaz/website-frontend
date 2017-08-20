@@ -20,13 +20,18 @@
 
 <script>
 
+import Vue from 'vue';
+import 'vue-awesome/icons/facebook-square';
+import 'vue-awesome/icons/github-square';
 import Util from '../Util';
 
 const MonsquazFooter = {
   name: 'monsquaz-footer',
   props: {},
   data () {
-    return {};
+    return {
+
+    };
   },
   apollo: {
 

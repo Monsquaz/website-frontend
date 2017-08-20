@@ -1,20 +1,19 @@
 <template>
   <div class="layout-view green">
-    <div class="container contents">
+    <div class="contents">
       <div class="columns">
-        <div v-if="hasTopMenu" class="column is-12">
+        <div v-if="topMenuId" class="column is-12">
           <horizontal-menu class="top-menu"></horizontal-menu>
         </div>
       </div>
       <div class="columns">
-        <div v-if="hasLeftMenu" class="column is-2">
+        <div v-if="hasLeft" class="column is-2">
           <vertical-menu class="left-menu"></vertical-menu>
         </div>
         <div class="column" v-bind:class="{
-          'is-8': hasLeftMenu && hasRightMenu,
-          'is-10': (!hasLeftMenu && hasRightMenu) || (hasLeftMenu && !hasRightMenu),
-          'is-12': !(hasLeftMenu || hasRightMenu),
-        }">
+          'is-8':  hasLeft && hasRight,
+          'is-10': (!hasLeft && hasRight) || (hasLeft && !hasRight),
+          'is-12': !(hasLeft || hasRight)}">
           <div class="columns">
             <div class="column is-12 type-content">
               <breadcrumbs v-bind:page="page" class="breadcrumbs"></breadcrumbs>
@@ -23,7 +22,7 @@
             </div>
           </div>
         </div>
-        <div v-if="hasRightMenu" class="column is-2">
+        <div v-if="hasRight" class="column is-2">
           <vertical-menu class="right-menu"></vertical-menu>
         </div>
       </div>
@@ -36,6 +35,7 @@
 <script>
 
 import Util from '../Util';
+import Vue from 'vue';
 
 const OverviewLayout = {
   name: 'loading-layout',
@@ -43,14 +43,18 @@ const OverviewLayout = {
     page: { type: Object }
   },
   data () {
-    /*
-      TODO: Base the has*Menu flags on the contents of page.layoutView.data
-    */
     return {
-      title: Util.getTranslation(this.page.title, 'en'), // TODO
-      hasLeftMenu: true,
-      hasRightMenu: true,
-      hasTopMenu: true
+      leftComponents: [],
+      rightComponents: [],
+      centerComponents: [], // Components after content ...
+      hasLeft: true,  // TODO: leftComponents.length  > 0
+      hasRight: false, // TODO: rightComponents.length > 0
+      topMenuId: 1
+    }
+  },
+  computed: {
+    title: function() {
+      return Util.getTranslation(this.page.title, 'en')
     }
   },
   apollo: {
@@ -80,17 +84,29 @@ export default OverviewLayout ;
   }
   .type-content {
     @extend %blob;
-    margin-top: 15px;
   }
+  /* Weirdness-hacks-etc */
+    .type-content {
+      margin-top: 12px; /* Why not 15px I dont know */
+      &.is-12 {
+        width: calc(100% - 24px);
+        margin-left: 12px;
+      }
+    }
+  /* End weirdness */
   .layout-view {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    padding-top: 15px;
   }
   .contents {
     flex: 1;
     margin-top: 15px;
     z-index: 1;
+    max-width: 1366px;
+    width: calc(100% - 30px);
+    margin: 0 auto;
   }
   .footer {
     margin-top: 15px;
@@ -107,5 +123,8 @@ export default OverviewLayout ;
   }
   .breadcrumbs {
 
+  }
+  .sharers  {
+    cursor: pointer;
   }
 </style>

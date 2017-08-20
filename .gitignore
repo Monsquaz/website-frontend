@@ -4,3 +4,4 @@ config.js
 public/assets
 *.swp
 package-lock.json
+bundle-size-report.txt

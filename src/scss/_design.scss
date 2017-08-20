@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+%default-font {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+}
 .app {
-  font-family: monospace, monospace;
+  @extend %default-font;
+}
+.menu {
+  @extend %default-font;
+}
+.breadcrumb {
+  @extend %default-font;
+}
+h1 {
+  font-weight: 700;
 }

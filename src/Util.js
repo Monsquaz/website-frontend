@@ -44,10 +44,11 @@ export default {
     }
     return result;
   },
-  getTranslation: (data, lang) => {
+  getTranslation: (data, lang, fieldName) => {
+    fieldName = fieldName || 'content';
     for(let translation of data) {
       if(translation.lang == lang) {
-        return translation.content;
+        return translation[fieldName];
       }
     }
     return null;

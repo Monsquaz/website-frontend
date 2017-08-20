@@ -55,6 +55,6 @@ export default VerticalMenu;
 
 <style lang="sass" scoped>
   .menu {
-    padding: 5px;
+    padding: 12px;
   }
 </style>

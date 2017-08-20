@@ -8,14 +8,23 @@ import {
 
 import VueApollo from 'vue-apollo';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 import Config from '../config.js';
+import Fb from './plugins/Fb';
+
+Vue.use(Fb, {
+  appId: 28576517180625,
+  autoLogAppEvents: true,
+  xfbml: true,
+  version: 'v2.10'
+});
 
 Vue.component('page', () => import(
   /* webpackChunkName: "page" */
   './Page.vue'
 ));
 
-/* Latouts and types for testing */
+/* Layouts and types for testing */
 /* ---------------------- */
 Vue.component('loading-layout', () => import(
   /* webpackChunkName: "loading-layout" */
@@ -44,9 +53,19 @@ Vue.component('error-page', () => import(
   './ErrorPage.vue'
 ));
 
+Vue.component('user-login', () => import(
+  /* webpackChunkName: "user-login" */
+  './types/UserLogin.vue'
+));
+
+Vue.component('user-registration', () => import(
+  /* webpackChunkName: "user-registration" */
+  './types/UserRegistration.vue'
+));
+
 /* Other components       */
 /* ---------------------- */
-import 'vue-awesome/icons'; // TODO: We don't have to import all.
+//import 'vue-awesome/icons'; // TODO: We don't have to import all.
 import Icon from 'vue-awesome/components/Icon.vue'
 Vue.component('icon', Icon); // Font awesome
 
@@ -78,9 +97,11 @@ Vue.component('breadcrumbs', () => import(
 Vue.use(VueRouter);
 Vue.use(VueApollo);
 
+import store from './store';
+
 const apolloClient = new ApolloClient({
   networkInterface: createNetworkInterface({
-    uri: Config.api_uri,
+    uri: Config.apiUri,
     transportBatching: true,
   }),
   ssrForceFetchDelay: 100,
@@ -92,7 +113,7 @@ const apolloProvider = new VueApollo({
 })
 
 new Vue({
-  el: 'body',
+  el: '#app',
   apolloProvider,
   render: (h) => h(App)
 })

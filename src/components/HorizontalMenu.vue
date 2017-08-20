@@ -1,9 +1,7 @@
 <template>
   <nav class="navbar ">
     <div class="navbar-brand">
-      <a class="navbar-item" href="http://monsquaz.org">
-        <strong>Monsquaz.org</strong>
-      </a>
+      <router-link class="navbar-item" to="/">Monsquaz.org</router-link>
       <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
         <span class="icon" style="color: #333;">
           <i class="fa fa-github"></i>
@@ -146,6 +144,8 @@
         </div>
       </div>
       <div class="navbar-end">
+        <router-link class="navbar-item" to="login">Login</router-link>
+        <router-link class="navbar-item" to="register">Register</router-link>
       </div>
     </div>
   </nav>

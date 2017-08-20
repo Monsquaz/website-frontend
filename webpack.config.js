@@ -5,7 +5,8 @@ var isProduction = process.env.NODE_ENV === 'production';
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CssNano = require('cssnano')
+const CssNano = require('cssnano');
+const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 
 module.exports = {
   entry: './src/main.js',
@@ -39,7 +40,8 @@ module.exports = {
         }
       },
       cssProcessor: CssNano ,
-    })
+    }),
+    new WebpackBundleSizeAnalyzerPlugin('../../bundle-size-report.txt')
   ],
   module: {
     loaders: [
