@@ -15,7 +15,12 @@ const ArticleType = {
   },
   data () {
     return {
-      content: Util.getTranslation(this.page.content, 'en') // TODO: use lang from vuex state
+
+    }
+  },
+  computed: {
+    content: function() {
+      return Util.getTranslation(this.page.content, 'en'); // TODO: use lang from vuex state
     }
   },
   apollo: {
