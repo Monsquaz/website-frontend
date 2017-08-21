@@ -129,15 +129,17 @@ const Page = {
         },
         result() {
           this.skipQuery = true;
-          document.title = Util.getTranslation(this.page.title, 'en'); // TODO
-          // TODO: Save element so it doesn't have to be queried next time?
-          let canonical = document.querySelector('link[rel="canonical"]');
-          if(this.page.canonical) {
-            canonical.href = Config.baseUri
-              + Util.getTranslation(this.page.canonical.paths, 'en', 'path');
-          } else {
-            canonical.href = Config.baseUri
-              + Util.getTranslation(this.page.paths, 'en', 'path');
+          if(this.page) {
+            document.title = Util.getTranslation(this.page.title, 'en'); // TODO
+            // TODO: Save element so it doesn't have to be queried next time?
+            let canonical = document.querySelector('link[rel="canonical"]');
+            if(this.page.canonical) {
+              canonical.href = Config.baseUri
+                + Util.getTranslation(this.page.canonical.paths, 'en', 'path');
+            } else {
+              canonical.href = Config.baseUri
+                + Util.getTranslation(this.page.paths, 'en', 'path');
+            }
           }
         },
         error(error) {
@@ -170,11 +172,43 @@ export default Page;
 <style lang="sass">
 
   .layout-view {
-
+/*
     &.green {
       background: linear-gradient(to bottom,  #a8fdd1 0%,#2efd94 50%,#003214 100%) no-repeat center center fixed;
       background-size: cover;
     }
-
+*/
+    &.green {
+      background: linear-gradient(
+        to bottom,
+        #bbffdd 0.00%,  #bbffdd 1.35%,
+        #aaffd5 1.35%,  #aaffd5 5.93%,
+        #99ffcc 5.93%,  #99ffcc 9.70%,
+        #88ffc4 9.70%,  #88ffc4 13.75%,
+        #77ffbb 13.75%, #77ffbb 17.52%,
+        #66ffb3 17.52%, #66ffb3 22.10%,
+        #55ffaa 22.10%, #55ffaa 26.15%,
+        #44ffa2 26.15%, #44ffa2 29.92%,
+        #33ff99 29.92%, #33ff99 33.96%,
+        #22ff91 33.96%, #22ff91 38.54%,
+        #11ff88 38.54%, #11ff88 42.59%,
+        #00ff80 42.59%, #00ff80 46.36%,
+        #00ee77 46.36%, #00ee77 50.40%,
+        #00dd6f 50.40%, #00dd6f 54.18%,
+        #00cc66 54.18%, #00cc66 58.76%,
+        #00bb5e 58.76%, #00bb5e 62.80%,
+        #00aa55 62.80%, #00aa55 66.58%,
+        #00994d 66.58%, #00994d 70.62%,
+        #008844 70.62%, #008844 75.20%,
+        #00773c 75.20%, #00773c 78.98%,
+        #006633 78.98%, #006633 83.02%,
+        #00552b 83.02%, #00552b 87.06%,
+        #004422 87.06%, #004422 91.64%,
+        #00331a 91.64%, #00331a 95.42%,
+        #002211 95.42%, #002211 99.46%,
+        #001109 99.46%, #001109 100.00%
+      ) no-repeat center center fixed;
+      background-size: cover;
+    }
   }
 </style>
