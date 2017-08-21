@@ -1,17 +1,10 @@
 <template>
-  <nav class="navbar ">
+  <nav class="navbar">
     <div class="navbar-brand">
-      <router-link class="navbar-item" to="/">Monsquaz.org</router-link>
-      <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
-        <span class="icon" style="color: #333;">
-          <i class="fa fa-github"></i>
-        </span>
-      </a>
-      <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
-        <span class="icon" style="color: #55acee;">
-          <i class="fa fa-twitter"></i>
-        </span>
-      </a>
+      <router-link class="navbar-item home" to="/">
+        <img src="images/favicon-32x32.png" class="logo" /> &nbsp;
+        Monsquaz.org
+      </router-link>
       <div class="navbar-burger burger" v-on:click="isActive = !isActive">
         <span></span>
         <span></span>
@@ -171,4 +164,15 @@ const HorizontalMenu = {
 export default HorizontalMenu;
 </script>
 
-<style lang="sass"></style>
+<style lang="sass" scoped>
+  .navbar {
+    position: relative;
+    z-index: 6;
+  }
+  .logo {
+
+  }
+  .home {
+    letter-spacing: 1px;
+  }
+</style>
