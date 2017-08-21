@@ -91,7 +91,7 @@
           </p>
         </div>
       </form>
-      <form v-if="showVerificationCodeForm">
+      <form v-if="showVerificationCodeForm" @submit.prevent="verify()">
         <div class="field">
           <p class="control">
             <input
@@ -155,6 +155,41 @@ const UserRegistration = {
     };
   },
   methods: {
+
+    verify: async function() {
+      this.isSubmitting = true;
+      try {
+        let data = await this.$apollo.mutate({
+          mutation: gql`mutation ($verificationCode: String!) {
+            verifyUser(verificationCode: $verificationCode) {
+              id, name
+            }
+          }`,
+          variables: {
+            verificationCode: this.verificationCode
+          },
+          update: (store, res) => {
+            console.warn('Store', store);
+            console.warn('res', res);
+          }
+        });
+        this.message = {
+          type: 'success',
+          content: 'Successfully verified. '
+            + 'You may now login. '
+        };
+        this.showRegistrationForm = false;
+        this.isSubmitting = false;
+        this.showVerificationCodeForm = false;
+      } catch(err) {
+        this.message = {
+          type: 'error',
+          content: err.message
+        };
+        this.isSubmitting = false;
+      }
+    },
+
     register: async function() {
       this.isSubmitting = true;
       try {
@@ -197,6 +232,7 @@ const UserRegistration = {
       }
 
     }
+
   },
   apollo: {
     administrables () {
