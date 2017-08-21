@@ -54,16 +54,33 @@ const OverviewLayout = {
     page: { type: Object }
   },
   data () {
+    console.warn('PAGE', this.page);
     return {
-      leftComponents: [],
-      rightComponents: [],
-      centerComponents: [], // Components after content ...
-      hasLeft: true,  // TODO: leftComponents.length  > 0
-      hasRight: false, // TODO: rightComponents.length > 0
       topMenuId: 1
     }
   },
   computed: {
+    layoutData: function() {
+      console.warn('COMPUTING layoutData');
+      return JSON.parse(this.page.layoutView.data);
+    },
+    leftComponents: function() {
+      return this.layoutData.leftComponents;
+    },
+    hasLeft: function() {
+      return true; // TODO: TEMP
+      return this.leftComponents.length > 0;
+    },
+    centerComponents: function() {
+      return this.layoutData.centerComponents;
+    },
+    rightComponents: function() {
+      return this.layoutData.rightComponents;
+    },
+    hasRight: function() {
+      return false; // TODO: TEMP
+      return this.rightComponents.length > 0;
+    },
     title: function() {
       return Util.getTranslation(this.page.title, 'en')
     }
@@ -123,12 +140,14 @@ export default OverviewLayout ;
     margin: 0 auto;
   }
   .footer {
-    margin-top: 15px;
+    margin-top: 30px;
     border-top: 1px solid black;
     background: linear-gradient(to bottom,  #a8fdd1 0%,#2efd94 25%,#003214 100%) no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     opacity: 0.9;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
   %heading {
     font-size: 30px;
