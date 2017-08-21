@@ -1,17 +1,38 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <div class="content has-text-centered">
-        <div class="scrolling">
-          You are anus! You need more Monsquaz!
+      <div class="columns">
+        <div class="column is-3 left">
+          <ul>
+            <li>IRC: #monsquaz @ irc.esper.net</li>
+            <li>Email: <a href="mailto:info@monsquaz.org">info@monsquaz.org</a></li>
+          </ul>
         </div>
-        <div class="social">
-          <a href="https://www.facebook.com/Monsquaz" target="_blank">
-            <icon name="facebook-square" scale="3"></icon>
-          </a>
-          <a href="https://github.com/Monsquaz" target="_blank">
-            <icon name="github-square" scale="3"></icon>
-          </a>
+        <div class="column is-6 content has-text-centered center">
+          <div class="scrolling">
+            You are anus! You need more Monsquaz!
+          </div>
+          <div class="copyright">
+            Copyright &copy; 2005 - 2017 Monsquaz Foundation, all rights reserved.
+          </div>
+          <div class="social">
+            <a href="https://www.facebook.com/Monsquaz" target="_blank">
+              <icon name="facebook-square" scale="3"></icon>
+            </a>
+            <a href="https://github.com/Monsquaz" target="_blank">
+              <icon name="github-square" scale="3"></icon>
+            </a>
+          </div>
+        </div>
+        <div class="column is-3 right">
+          <ul>
+            <li>
+              <router-link to="privacy-policy">Privacy policy</router-link>
+            </li>
+            <li>
+              <router-link to="disclaimer">Disclaimer</router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -47,6 +68,11 @@ export default MonsquazFooter;
      height: 20px;
      overflow: hidden;
      white-space: nowrap;
+     font-size: 18px;
+  }
+  .copyright {
+    margin-top: 10px;
+    font-size: 12px;
   }
   .social {
     margin-top: 15px;
@@ -60,4 +86,7 @@ export default MonsquazFooter;
     50% { text-indent: -250px }
     100%   { text-indent: 250px }
   }
+    .right {
+      text-align: right;
+    }
 </style>
