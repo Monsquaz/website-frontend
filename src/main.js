@@ -43,6 +43,11 @@ Vue.component('overview-layout', () => import(
   './layouts/OverviewLayout.vue'
 ));
 
+Vue.component('admin-layout', () => import(
+  /* webpackChunkName: "admin-layout" */
+  './layouts/AdminLayout.vue'
+));
+
 Vue.component('article-type', () => import(
   /* webpackChunkName: "article" */
   './types/ArticleType.vue'
@@ -56,6 +61,11 @@ Vue.component('error-page', () => import(
 Vue.component('user-login', () => import(
   /* webpackChunkName: "user-login" */
   './types/UserLogin.vue'
+));
+
+Vue.component('user-profile', () => import(
+  /* webpackChunkName: "user-profile" */
+  './types/UserProfile.vue'
 ));
 
 Vue.component('user-registration', () => import(
@@ -90,6 +100,11 @@ Vue.component('monsquaz-footer', () => import(
 Vue.component('green-arrows', () => import(
   /* webpackChunkName: "green-arrows" */
   './components/GreenArrows.vue'
+));
+
+Vue.component('pink-arrows', () => import(
+  /* webpackChunkName: "pinkarrows" */
+  './components/PinkArrows.vue'
 ));
 
 Vue.component('breadcrumbs', () => import(

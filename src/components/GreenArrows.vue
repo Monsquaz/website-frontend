@@ -61,25 +61,25 @@ export default Footer;
     animation-fill-mode: forwards;
     transition: top 1s;
   }
-  .x1  { @extend %arrow; left: 5vw;  animation:  move-green-arrow 10.6s  linear 1.0s infinite; }
-  .x2  { @extend %arrow; left: 10vw; animation:  move-green-arrow 10.5s  linear 1.1s infinite; }
-  .x3  { @extend %arrow; left: 15vw; animation:  move-green-arrow 9.8s   linear 0.7s infinite; }
-  .x4  { @extend %arrow; left: 20vw; animation:  move-green-arrow 10.2s  linear 1.5s infinite; }
-  .x5  { @extend %arrow; left: 25vw; animation:  move-green-arrow 7s     linear 1.1s infinite; }
+  .x1  { @extend %arrow; left: 5vw;  animation:  move-green-arrow 10.6s  linear -5.0s infinite; }
+  .x2  { @extend %arrow; left: 10vw; animation:  move-green-arrow 10.5s  linear -3.1s infinite; }
+  .x3  { @extend %arrow; left: 15vw; animation:  move-green-arrow 9.8s   linear -0.7s infinite; }
+  .x4  { @extend %arrow; left: 20vw; animation:  move-green-arrow 10.2s  linear -6.5s infinite; }
+  .x5  { @extend %arrow; left: 25vw; animation:  move-green-arrow 7s     linear -2.1s infinite; }
   .x6  { @extend %arrow; left: 30vw; animation:  move-green-arrow 6.3s   linear 0.8s infinite; }
-  .x7  { @extend %arrow; left: 35vw; animation:  move-green-arrow 5.9s   linear 1.7s infinite; }
-  .x8  { @extend %arrow; left: 40vw; animation:  move-green-arrow 8.3s   linear 0.7s infinite; }
-  .x9  { @extend %arrow; left: 45vw; animation:  move-green-arrow 7.6s   linear 2.5s infinite; }
-  .x10 { @extend %arrow; left: 50vw; animation:  move-green-arrow 11.1s  linear 1.3s infinite; }
-  .x11 { @extend %arrow; left: 55vw; animation:  move-green-arrow 7.5s   linear 0.3s infinite; }
-  .x12 { @extend %arrow; left: 60vw; animation:  move-green-arrow 7s     linear 0.9s infinite; }
-  .x13 { @extend %arrow; left: 65vw; animation:  move-green-arrow 11.4s  linear 1.6s infinite; }
-  .x14 { @extend %arrow; left: 70vw; animation:  move-green-arrow 8.9s   linear 0.9s infinite; }
-  .x15 { @extend %arrow; left: 75vw; animation:  move-green-arrow 7.5s   linear 2.4s infinite; }
-  .x16 { @extend %arrow; left: 80vw; animation:  move-green-arrow 5.4s   linear 1.6s infinite; }
-  .x17 { @extend %arrow; left: 85vw; animation:  move-green-arrow 6.4s   linear 2.7s infinite; }
-  .x18 { @extend %arrow; left: 90vw; animation:  move-green-arrow 11.7s  linear 0.9s infinite; }
-  .x19 { @extend %arrow; left: 95vw; animation:  move-green-arrow 8.9s   linear 0.2s infinite; }
+  .x7  { @extend %arrow; left: 35vw; animation:  move-green-arrow 5.9s   linear -2.7s infinite; }
+  .x8  { @extend %arrow; left: 40vw; animation:  move-green-arrow 8.3s   linear -3.7s infinite; }
+  .x9  { @extend %arrow; left: 45vw; animation:  move-green-arrow 7.6s   linear -2.5s infinite; }
+  .x10 { @extend %arrow; left: 50vw; animation:  move-green-arrow 11.1s  linear -8.3s infinite; }
+  .x11 { @extend %arrow; left: 55vw; animation:  move-green-arrow 7.5s   linear -2.3s infinite; }
+  .x12 { @extend %arrow; left: 60vw; animation:  move-green-arrow 7s     linear -3.9s infinite; }
+  .x13 { @extend %arrow; left: 65vw; animation:  move-green-arrow 11.4s  linear -2.6s infinite; }
+  .x14 { @extend %arrow; left: 70vw; animation:  move-green-arrow 8.9s   linear -1.9s infinite; }
+  .x15 { @extend %arrow; left: 75vw; animation:  move-green-arrow 7.5s   linear -3.4s infinite; }
+  .x16 { @extend %arrow; left: 80vw; animation:  move-green-arrow 5.4s   linear -1.6s infinite; }
+  .x17 { @extend %arrow; left: 85vw; animation:  move-green-arrow 6.4s   linear -2.7s infinite; }
+  .x18 { @extend %arrow; left: 90vw; animation:  move-green-arrow 11.7s  linear -2.9s infinite; }
+  .x19 { @extend %arrow; left: 95vw; animation:  move-green-arrow 8.9s   linear -6.2s infinite; }
   @keyframes move-green-arrow {
     0% {
       transform: translate3d(0, calc(100vh + 150px), 0);

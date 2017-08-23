@@ -212,5 +212,38 @@ export default Page;
       ) no-repeat center center fixed;
       background-size: cover;
     }
+
+    &.pink {
+      background: linear-gradient(
+        to bottom,
+        #ffeef6 0.00%,  #ffeef6 1.35%,
+        #ffddee 1.35%,  #ffddee 5.93%,
+        #ffcce5 5.93%,  #ffcce5 9.70%,
+        #ffbbdd 9.70%,  #ffbbdd 13.75%,
+        #ffaad4 13.75%, #ffaad4 17.52%,
+        #ff99cc 17.52%, #ff99cc 22.10%,
+        #ff88c3 22.10%, #FF88c3 26.15%,
+        #ff77bb 26.15%, #ff77bb 29.92%,
+        #ff66b2 29.92%, #ff66b2 33.96%,
+        #ff55aa 33.96%, #ff55aa 38.54%,
+        #ff44a1 38.54%, #ff44a1 42.59%,
+        #ff3399 42.59%, #ff3399 46.36%,
+        #ff2290 46.36%, #ff2290 50.40%,
+        #ff1188 50.40%, #ff1188 54.18%,
+        #ff007f 54.18%, #ff007f 58.76%,
+        #ee0077 58.76%, #ee0077 62.80%,
+        #ff006e 62.80%, #dd006e 66.58%,
+        #cc0066 66.58%, #cc0066 70.62%,
+        #bb005d 70.62%, #bb005d 75.20%,
+        #aa0055 75.20%, #aa0055 78.98%,
+        #99004c 78.98%, #99004c 83.02%,
+        #880044 83.02%, #880044 87.06%,
+        #77003b 87.06%, #77003b 91.64%,
+        #660033 91.64%, #660033 95.42%,
+        #55002a 95.42%, #55002a 99.46%,
+        #440022 99.46%, #440022 100.00%
+      ) no-repeat center center fixed;
+      background-size: cover;
+    }
   }
 </style>
