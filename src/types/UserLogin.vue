@@ -4,7 +4,7 @@
       <div v-if="message" class="notification" v-bind:class="{'is-success': message.type == 'success', 'is-danger': message.type == 'error'}">
         {{ message.content }}
       </div>
-      <form v-if="!loggedIn" @submit.prevent="login()">
+      <form v-if="!authToken" @submit.prevent="login()">
         <div class="field">
           <p class="control">
             <input class="input" type="text" v-model="username" :disabled="isSubmitting" placeholder="Username">
@@ -31,6 +31,7 @@
 
 import Util from '../Util';
 import gql from 'graphql-tag';
+import { mapGetters } from 'vuex';
 
 const UserLogin = {
   name: 'breadcrumbs',
@@ -42,15 +43,17 @@ const UserLogin = {
       username:     '',
       password:     '',
       isSubmitting: false,
-      message:      null,
-      loggedIn:     false
+      message:      null
     };
+  },
+  computed: {
+    ...mapGetters(['authToken'])
   },
   methods: {
     login: async function() {
       this.isSubmitting = true;
       try {
-        let data = await this.$apollo.mutate({
+        let response = await this.$apollo.mutate({
           mutation: gql`mutation ($username: String!, $password: String!) {
             login(username: $username, password: $password) {
               token
@@ -61,8 +64,7 @@ const UserLogin = {
             password: this.password
           },
           update: (store, res) => {
-            console.warn('Store', store);
-            console.warn('res', res);
+
           }
         });
         this.message = {
@@ -70,7 +72,7 @@ const UserLogin = {
           content: 'Successfully logged in.'
         };
         this.isSubmitting = false;
-        this.loggedIn = true;
+        this.$store.dispatch('setAuthToken', response.data.login.token)
       } catch(err) {
         this.message = {
           type: 'error',

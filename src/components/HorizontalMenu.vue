@@ -136,9 +136,13 @@
           </div>
         </div>
       </div>
-      <div class="navbar-end">
+      <div v-if="!authToken" class="navbar-end">
         <router-link class="navbar-item" to="login">Login</router-link>
         <router-link class="navbar-item" to="register">Register</router-link>
+      </div>
+      <div v-if="authToken" class="navbar-end">
+        <router-link class="navbar-item" to="profile">Profile</router-link>
+        <a class="navbar-item" v-on:click.stop="logout">Logout</a>
       </div>
     </div>
   </nav>
@@ -147,6 +151,7 @@
 <script>
 
 import Util from '../Util';
+import { mapGetters } from 'vuex';
 
 const HorizontalMenu = {
   name: 'horizontal-menu',
@@ -155,6 +160,14 @@ const HorizontalMenu = {
     return {
       isActive: false
     };
+  },
+  computed: {
+    ...mapGetters(['authToken'])
+  },
+  methods: {
+    logout: function() {
+      this.$store.dispatch('logout');
+    }
   },
   apollo: {
 

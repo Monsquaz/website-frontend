@@ -128,8 +128,8 @@ const Page = {
           return pages[0];
         },
         result() {
-          this.skipQuery = true;
           if(this.page) {
+            this.skipQuery = true;
             document.title = Util.getTranslation(this.page.title, 'en'); // TODO
             // TODO: Save element so it doesn't have to be queried next time?
             let canonical = document.querySelector('link[rel="canonical"]');
@@ -140,6 +140,8 @@ const Page = {
               canonical.href = Config.baseUri
                 + Util.getTranslation(this.page.paths, 'en', 'path');
             }
+          } else {
+            this.$router.push('/404')
           }
         },
         error(error) {

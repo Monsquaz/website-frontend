@@ -99,6 +99,7 @@ Vue.component('breadcrumbs', () => import(
 
 Vue.use(VueRouter);
 Vue.use(VueApollo);
+Vue.use(Vuex);
 
 import store from './store';
 
@@ -118,5 +119,6 @@ const apolloProvider = new VueApollo({
 new Vue({
   el: '#app',
   apolloProvider,
+  store,
   render: (h) => h(App)
 })
