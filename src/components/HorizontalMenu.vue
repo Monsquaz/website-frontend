@@ -136,12 +136,15 @@
           </div>
         </div>
       </div>
-      <div v-if="!authToken" class="navbar-end">
+      <div v-if="!user" class="navbar-end">
         <router-link class="navbar-item" to="login">Login</router-link>
         <router-link class="navbar-item" to="register">Register</router-link>
       </div>
-      <div v-if="authToken" class="navbar-end">
-        <router-link class="navbar-item" to="profile">Profile</router-link>
+      <div v-if="user" class="navbar-end">
+        <router-link class="navbar-item" to="profile">
+          <img class="gravatar" v-bind:src="user.gravatar" />
+          {{ user.name }}
+        </router-link>
         <a class="navbar-item" v-on:click.stop="logout">Logout</a>
       </div>
     </div>
@@ -162,11 +165,12 @@ const HorizontalMenu = {
     };
   },
   computed: {
-    ...mapGetters(['authToken'])
+    ...mapGetters(['user'])
   },
   methods: {
     logout: function() {
       this.$store.dispatch('logout');
+      this.$router.push('/');
     }
   },
   apollo: {
@@ -187,5 +191,8 @@ export default HorizontalMenu;
   }
   .home {
     letter-spacing: 1px;
+  }
+  .gravatar {
+    margin-right: 10px;
   }
 </style>

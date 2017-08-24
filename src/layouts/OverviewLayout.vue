@@ -38,6 +38,7 @@
         </div>
       </div>
     </div>
+    <notifications />
     <green-arrows></green-arrows>
     <monsquaz-footer class="footer"></monsquaz-footer>
   </div>

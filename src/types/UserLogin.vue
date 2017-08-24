@@ -1,9 +1,6 @@
 <template>
   <div class="columns">
     <div class="column is-4">
-      <div v-if="message" class="notification" v-bind:class="{'is-success': message.type == 'success', 'is-danger': message.type == 'error'}">
-        {{ message.content }}
-      </div>
       <form v-if="!authToken" @submit.prevent="login()">
         <div class="field">
           <p class="control">
@@ -42,8 +39,7 @@ const UserLogin = {
     return {
       username:     '',
       password:     '',
-      isSubmitting: false,
-      message:      null
+      isSubmitting: false
     };
   },
   computed: {
@@ -51,34 +47,12 @@ const UserLogin = {
   },
   methods: {
     login: async function() {
-      this.isSubmitting = true;
-      try {
-        let response = await this.$apollo.mutate({
-          mutation: gql`mutation ($username: String!, $password: String!) {
-            login(username: $username, password: $password) {
-              token
-            }
-          }`,
-          variables: {
-            username: this.username,
-            password: this.password
-          },
-          update: (store, res) => {
-
-          }
-        });
-        this.message = {
-          type: 'success',
-          content: 'Successfully logged in.'
-        };
-        this.isSubmitting = false;
-        this.$store.dispatch('setAuthToken', response.data.login.token)
-      } catch(err) {
-        this.message = {
-          type: 'error',
-          content: err.message
-        };
-        this.isSubmitting = false;
+      let success = await this.$store.dispatch('login', {
+        username: this.username,
+        password: this.password
+      });
+      if(success) {
+        this.$router.push('/profile');
       }
     }
   },

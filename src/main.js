@@ -1,11 +1,5 @@
 import Vue from 'vue';
 import App from './App.vue';
-
-import {
-  ApolloClient,
-  createNetworkInterface
-} from 'apollo-client';
-
 import VueApollo from 'vue-apollo';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
@@ -112,28 +106,35 @@ Vue.component('breadcrumbs', () => import(
   './components/Breadcrumbs.vue'
 ));
 
+Vue.component('notifications', () => import(
+  /* webpackChunkName: "notifications" */
+  './components/Notifications.vue'
+));
+
 Vue.use(VueRouter);
 Vue.use(VueApollo);
 Vue.use(Vuex);
 
-import store from './store';
-
-const apolloClient = new ApolloClient({
-  networkInterface: createNetworkInterface({
-    uri: Config.apiUri,
-    transportBatching: true,
-  }),
-  ssrForceFetchDelay: 100,
-  connectToDevTools: true,
-});
+import monsquazApolloClient from './MonsquazApolloClient';
 
 const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
-})
+  defaultClient: monsquazApolloClient
+});
+
+import store from './store';
+import { mapGetters } from 'vuex';
 
 new Vue({
   el: '#app',
   apolloProvider,
   store,
-  render: (h) => h(App)
+  render: (h) => h(App),
+  computed: {
+    ...mapGetters(['decodedAuthToken'])
+  },
+  created() {
+    if(this.decodedAuthToken) {
+      this.$store.dispatch('loadUser', this.decodedAuthToken.userId);
+    }
+  }
 })
