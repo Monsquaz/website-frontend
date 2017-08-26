@@ -6,6 +6,11 @@
           <horizontal-menu class="top-menu"></horizontal-menu>
         </div>
       </div>
+      <div class="columns flash-notification" v-if="flashNotification">
+        <div class="column is-12">
+          <notification v-bind:data="flashNotification" />
+        </div>
+      </div>
       <div class="columns">
         <div v-if="hasLeft" class="column is-2">
           <vertical-menu class="left-menu"></vertical-menu>
@@ -38,7 +43,6 @@
         </div>
       </div>
     </div>
-    <notifications />
     <pink-arrows></pink-arrows>
     <monsquaz-footer class="footer"></monsquaz-footer>
   </div>
@@ -49,20 +53,21 @@
 import Util from '../Util';
 import Vue from 'vue';
 
+import { mapGetters } from 'vuex';
+
 const OverviewLayout = {
   name: 'overview-layout',
   props: {
     page: { type: Object }
   },
   data () {
-    console.warn('PAGE', this.page);
     return {
       topMenuId: 1
     }
   },
   computed: {
+    ...mapGetters(['flashNotification']),
     layoutData: function() {
-      console.warn('COMPUTING layoutData');
       return JSON.parse(this.page.layoutView.data);
     },
     leftComponents: function() {
@@ -175,5 +180,14 @@ export default OverviewLayout ;
   .disqus {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .flash-notification {
+    margin-top: -20px;
+    margin-bottom: -10px;
+
+    .notification {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
   }
 </style>

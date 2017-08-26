@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-4">
-      <form v-if="!authToken" @submit.prevent="login()">
+      <form v-if="!authToken" @submit.prevent="login()" v-bind:class="{'submitting': isSubmitting}">
         <div class="field">
           <p class="control">
             <input class="input" type="text" v-model="username" :disabled="isSubmitting" placeholder="Username">
@@ -38,12 +38,11 @@ const UserLogin = {
   data () {
     return {
       username:     '',
-      password:     '',
-      isSubmitting: false
+      password:     ''
     };
   },
   computed: {
-    ...mapGetters(['authToken'])
+    ...mapGetters(['isSubmitting', 'authToken'])
   },
   methods: {
     login: async function() {
@@ -64,4 +63,8 @@ const UserLogin = {
 export default UserLogin;
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+  .submitting {
+    opacity: 0.5;
+  }
+</style>

@@ -106,9 +106,19 @@ Vue.component('breadcrumbs', () => import(
   './components/Breadcrumbs.vue'
 ));
 
-Vue.component('notifications', () => import(
-  /* webpackChunkName: "notifications" */
-  './components/Notifications.vue'
+Vue.component('notification', () => import(
+  /* webpackChunkName: "notification" */
+  './components/Notification.vue'
+));
+
+Vue.component('admin-browser', () => import(
+  /* webpackChunkName: "admin-browser" */
+  './components/AdminBrowser.vue'
+));
+
+Vue.component('admin-actions', () => import(
+  /* webpackChunkName: "admin-actions" */
+  './components/AdminActions.vue'
 ));
 
 Vue.use(VueRouter);

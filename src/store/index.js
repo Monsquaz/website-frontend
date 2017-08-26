@@ -18,6 +18,8 @@ const store = new Vuex.Store({
     page: null,
     isSubmitting: false,
     notifications: [],
+    flashNotification: null,
+    flashNotificationTime: null,
     apollo: monsquazApolloClient
   },
   mutations: {
@@ -30,6 +32,10 @@ const store = new Vuex.Store({
     },
     SET_IS_SUBMITTING(state, isSubmitting) {
       state.isSubmitting = isSubmitting;
+    },
+    SET_FLASH_NOTIFICATION(state, flashNotification) {
+      state.flashNotification = flashNotification;
+      state.flashNotificationTime = (new Date()).getTime();
     },
     PUSH_NOTIFICATION(state, notification) {
       state.notifications.push(notification);
@@ -47,9 +53,13 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    logout({commit, state})  {
+    logout({dispatch, commit, state})  {
       localStorage.removeItem("authToken");
       commit('LOGOUT');
+      dispatch('setFlashNotification', {
+        type: 'info',
+        content: `You've been logged out.`
+      });
     },
     loadUser: async ({commit, state, rootState}, userId) => {
       await rootState.apollo.watchQuery({
@@ -91,13 +101,13 @@ const store = new Vuex.Store({
           dispatch('loadUser', decodedAuthToken.userId);
           localStorage.setItem("authToken", authToken);
           commit('SET_AUTH_TOKEN', {authToken, decodedAuthToken});
-          dispatch('notify', {
+          dispatch('setFlashNotification', {
             type: 'success',
             content: 'Successfully logged in.'
           });
           result = true;
         } catch(err) {
-          dispatch('notify', {
+          dispatch('setFlashNotification', {
             type: 'error',
             content: err.message
           });
@@ -108,6 +118,14 @@ const store = new Vuex.Store({
     },
     setPage({commit}, page) {
       commit('SET_PAGE', page);
+    },
+    setFlashNotification({commit}, notification) {
+      commit('SET_FLASH_NOTIFICATION', notification);
+    },
+    clearOldFlashNotification({commit, state}, notification) {
+      if(((new Date()).getTime() - state.flashNotificationTime) > 100) {
+        commit('SET_FLASH_NOTIFICATION', null);
+      }
     },
     notify({commit}, notification) {
       commit('PUSH_NOTIFICATION', notification);
@@ -120,7 +138,8 @@ const store = new Vuex.Store({
     authToken:            state => state.authToken,
     decodedAuthToken:     state => state.decodedAuthToken,
     notifications:        state => state.notifications,
-    user:                 state => state.user
+    user:                 state => state.user,
+    flashNotification:    state => state.flashNotification
   }
 });
 

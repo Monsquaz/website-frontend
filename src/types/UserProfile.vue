@@ -1,6 +1,7 @@
 <template>
   <div class="type-view">
     <p>{{ content }}</p>
+    <admin-browser />
   </div>
 </template>
 
@@ -8,8 +9,8 @@
 
 import Util from '../Util';
 
-const ArticleType = {
-  name: 'article-type',
+const UserProfileType = {
+  name: 'user-profile',
   props: {
     page: { type: Object }
   },
@@ -28,7 +29,7 @@ const ArticleType = {
   }
 }
 
-export default ArticleType;
+export default UserProfileType;
 </script>
 
 <style lang="sass">

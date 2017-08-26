@@ -17,6 +17,7 @@ import Config from '../config';
 let reactToRouteChange = (instance, from, to) => {
   instance.path = to.path;
   instance.skipQuery = false;
+  instance.$store.dispatch('clearOldFlashNotification');
 }
 
 const Page = {

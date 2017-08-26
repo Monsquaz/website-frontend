@@ -38,15 +38,109 @@
 <script>
 
 import Util from '../Util';
+import gql from 'graphql-tag';
 
 const VerticalMenu = {
   name: 'vertical-menu',
-  props: {},
+  props: {
+    data: Object
+  },
   data () {
     return {};
   },
+  computed: {
+    menuItemsTreeMerged: function() {
+      if(this.menu && this.menuItemsTree) {
+        return Util.mapTree(this.menu.items, this.menuItemsTree);
+      } else {
+        return null;
+      }
+    }
+  },
   apollo: {
-
+    menuItemsTree () {
+      return {
+        query: () => {
+          return gql`query ($menuId: Int!) {
+            menuItemsTree(menuId: $menuId) {
+              ancestor {
+                id
+              }, descendant {
+                id
+              }
+            }
+          }`
+        },
+        watchLoading(isLoading, countModifier) {},
+        update({ menuItemsTree }) {
+          return menuItemsTree;
+        },
+        result() {},
+        error(error) {
+          this.$store.dispatch('setFlashNotification', {
+            type: 'error',
+            content: error
+          });
+        },
+        variables: () => ({
+          menuId: this.data.id
+        }),
+        skip: () => {
+          return false;
+        }
+      };
+    },
+    menu () {
+      return {
+        query: () => {
+          return gql`query ($menuId: Int!) {
+            menus(id: $menuId) {
+              items {
+                id, title {
+                  lang
+                  content
+                }, page { slug {
+                  lang
+                  content
+                } }
+              }
+            }
+          }`
+        },
+        watchLoading(isLoading, countModifier) {},
+        update({ menus }) {
+          if(menus.length == 0) {
+            this.$store.dispatch('setFlashNotification', {
+              type: 'error',
+              content: `Menu ${this.data.id} not found`
+            });
+          }
+          return {
+            items: menus[0].items.map((e) => ({
+              ...e,
+              title: Util.mapTranslations(e.title),
+              page: {
+                ...e.page,
+                slug: Util.mapTranslations(e.page.slug)
+              }
+            }))
+          };
+        },
+        result() {},
+        error(error) {
+          this.$store.dispatch('setFlashNotification', {
+            type: 'error',
+            content: error
+          });
+        },
+        variables: () => ({
+          menuId: this.data.id
+        }),
+        skip: () => {
+          return false;
+        }
+      };
+    }
   }
 }
 

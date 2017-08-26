@@ -1,14 +1,19 @@
 <template>
   <div class="layout-view green">
     <div class="contents">
-      <div class="columns">
-        <div v-if="topMenuId" class="column is-12">
-          <horizontal-menu class="top-menu"></horizontal-menu>
+      <div v-if="horizontalMenu" class="columns">
+        <div class="column is-12">
+          <horizontal-menu v-bind:data="horizontalMenu" class="top-menu"></horizontal-menu>
+        </div>
+      </div>
+      <div class="columns flash-notification" v-if="flashNotification">
+        <div class="column is-12">
+          <notification v-bind:data="flashNotification" />
         </div>
       </div>
       <div class="columns">
         <div v-if="hasLeft" class="column is-2">
-          <vertical-menu class="left-menu"></vertical-menu>
+          <vertical-menu v-bind:data="horizontalMenu" class="left-menu"></vertical-menu>
         </div>
         <div class="column" v-bind:class="{
           'is-8':  hasLeft && hasRight,
@@ -34,11 +39,10 @@
           </div>
         </div>
         <div v-if="hasRight" class="column is-2">
-          <vertical-menu class="right-menu"></vertical-menu>
+          <vertical-menu v-bind:data="horizontalMenu" class="right-menu"></vertical-menu>
         </div>
       </div>
     </div>
-    <notifications />
     <green-arrows></green-arrows>
     <monsquaz-footer class="footer"></monsquaz-footer>
   </div>
@@ -49,20 +53,23 @@
 import Util from '../Util';
 import Vue from 'vue';
 
+import { mapGetters } from 'vuex';
+
 const OverviewLayout = {
   name: 'overview-layout',
   props: {
     page: { type: Object }
   },
   data () {
-    console.warn('PAGE', this.page);
-    return {
-      topMenuId: 1
-    }
+    return {};
   },
   computed: {
+    ...mapGetters(['flashNotification']),
+    horizontalMenu: function(){
+      console.warn('LAYOUTDATA', this.layoutData.horizontalMenu);
+      return this.layoutData.horizontalMenu;
+    },
     layoutData: function() {
-      console.warn('COMPUTING layoutData');
       return JSON.parse(this.page.layoutView.data);
     },
     leftComponents: function() {
@@ -175,5 +182,14 @@ export default OverviewLayout ;
   .disqus {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .flash-notification {
+    margin-top: -20px;
+    margin-bottom: -10px;
+
+    .notification {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
   }
 </style>

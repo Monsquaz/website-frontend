@@ -3,12 +3,12 @@ export default {
     let tree = itemTree.slice(0);
     let itemsById = {};
     for(var i = 0; i < items.length; i++) {
-      itemsById[items[i].id] = items[i];
+      itemsById[items[i].id] = { ...items[i] };
     }
     do {
-      for(i_descendant in tree) {
+      for(let i_descendant in tree) {
         var isAncestor = false;
-        for(i_ancestor in tree) {
+        for(let i_ancestor in tree) {
           if(tree[i_descendant].descendant.id == tree[i_ancestor].ancestor.id) {
             isAncestor = true;
           }
@@ -31,7 +31,6 @@ export default {
             return Object.values(itemsById);
           }
           tree.splice(i_descendant, 1);
-
         }
       }
     } while(tree.length > 0);
