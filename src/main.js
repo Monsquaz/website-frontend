@@ -67,6 +67,11 @@ Vue.component('user-registration', () => import(
   './types/UserRegistration.vue'
 ));
 
+Vue.component('faq', () => import(
+  /* webpackChunkName: "faq" */
+  './types/FAQ.vue'
+));
+
 /* Other components       */
 /* ---------------------- */
 //import 'vue-awesome/icons'; // TODO: We don't have to import all.
@@ -119,6 +124,36 @@ Vue.component('admin-browser', () => import(
 Vue.component('admin-actions', () => import(
   /* webpackChunkName: "admin-actions" */
   './components/AdminActions.vue'
+));
+
+Vue.component('blurbs', () => import(
+  /* webpackChunkName: "blurbs" */
+  './components/Blurbs.vue'
+));
+
+Vue.component('site-search', () => import(
+  /* webpackChunkName: "site-search" */
+  './components/SiteSearch.vue'
+));
+
+Vue.component('newsletter-subscribe', () => import(
+  /* webpackChunkName: "newsletter-subscribe" */
+  './components/NewsletterSubscribe.vue'
+));
+
+Vue.component('irc-stream', () => import(
+  /* webpackChunkName: "irc-stream" */
+  './components/IrcStream.vue'
+));
+
+Vue.component('forum-activity', () => import(
+  /* webpackChunkName: "forum-activity" */
+  './components/ForumActivity.vue'
+));
+
+Vue.component('page-teasers', () => import(
+  /* webpackChunkName: "page-teasers" */
+  './components/PageTeasers.vue'
 ));
 
 Vue.use(VueRouter);
