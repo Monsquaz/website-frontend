@@ -13,7 +13,13 @@
       </div>
       <div class="columns">
         <div v-if="hasLeft" class="column is-2">
-          <vertical-menu v-bind:data="horizontalMenu" class="left-menu"></vertical-menu>
+          <component
+            class="left-component"
+            v-for="(component, index) in leftComponents"
+            :is="component.type"
+            v-bind:data="component.data"
+            v-bind:key="'left' + '_' + page.id + '_' + index"
+             />
         </div>
         <div class="column" v-bind:class="{
           'is-8':  hasLeft && hasRight,
@@ -23,9 +29,17 @@
             <div class="column is-12 type-content">
               <breadcrumbs v-bind:page="page" class="breadcrumbs"></breadcrumbs>
               <h1 class="page-title">{{ title }}</h1>
-              <component :is="page.typeView.type.component" v-bind:page="page"></component>
+              <component
+              :is="page.typeView.type.component"
+              v-bind:page="page" />
             </div>
           </div>
+          <component
+            class="center-component"
+            v-for="(component, index) in centerComponents"
+            v-bind:key="'center' + '_' + page.id + '_' + index"
+            :is="component.type"
+            v-bind:data="component.data" />
           <div class="columns" v-if="page.comments">
             <div class="column is-12 comments" >
               <h2 class="sub-heading">Comments</h2>
@@ -39,7 +53,12 @@
           </div>
         </div>
         <div v-if="hasRight" class="column is-2">
-          <vertical-menu v-bind:data="horizontalMenu" class="right-menu"></vertical-menu>
+          <component
+            class="right-component"
+            v-for="(component, index) in rightComponents"
+            v-bind:key="'right' + '_' + page.id + '_' + index"
+            :is="component.type"
+            v-bind:data="component.data" />
         </div>
       </div>
     </div>
@@ -66,7 +85,6 @@ const OverviewLayout = {
   computed: {
     ...mapGetters(['flashNotification']),
     horizontalMenu: function(){
-      console.warn('LAYOUTDATA', this.layoutData.horizontalMenu);
       return this.layoutData.horizontalMenu;
     },
     layoutData: function() {
@@ -76,7 +94,6 @@ const OverviewLayout = {
       return this.layoutData.leftComponents;
     },
     hasLeft: function() {
-      return true; // TODO: TEMP
       return this.leftComponents.length > 0;
     },
     centerComponents: function() {
@@ -86,7 +103,6 @@ const OverviewLayout = {
       return this.layoutData.rightComponents;
     },
     hasRight: function() {
-      return false; // TODO: TEMP
       return this.rightComponents.length > 0;
     },
     title: function() {
@@ -112,11 +128,20 @@ export default OverviewLayout ;
   .top-menu {
     @extend %blob;
   }
-  .left-menu {
+  .left-component {
+    @extend %blob;
+    &:not(:first-child) {
+      margin-top: 12px;
+    }
+  }
+  .center-component {
     @extend %blob;
   }
-  .right-menu {
+  .right-component {
     @extend %blob;
+    &:not(:first-child) {
+      margin-top: 12px;
+    }
   }
   .type-content {
     @extend %blob;

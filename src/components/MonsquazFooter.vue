@@ -16,11 +16,14 @@
             Copyright &copy; 2005 - 2017 Monsquaz Foundation, all rights reserved.
           </div>
           <div class="social">
-            <a href="https://www.facebook.com/Monsquaz" target="_blank">
+            <a href="https://www.facebook.com/Monsquaz" title="Facebook" target="_blank">
               <icon name="facebook-square" scale="3"></icon>
             </a>
-            <a href="https://github.com/Monsquaz" target="_blank">
+            <a href="https://github.com/Monsquaz" title="Github" target="_blank">
               <icon name="github-square" scale="3"></icon>
+            </a>
+            <a href="https://www.instagram.com/monsquaz/" title="Instagram" target="_blank">
+              <icon name="instagram" scale="3"></icon>
             </a>
           </div>
         </div>
@@ -44,6 +47,7 @@
 import Vue from 'vue';
 import 'vue-awesome/icons/facebook-square';
 import 'vue-awesome/icons/github-square';
+import 'vue-awesome/icons/instagram';
 import Util from '../Util';
 
 const MonsquazFooter = {
@@ -79,6 +83,9 @@ export default MonsquazFooter;
 
     a {
       color: #ffffff;
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
     }
   }
   @keyframes marquee {

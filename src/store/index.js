@@ -139,7 +139,8 @@ const store = new Vuex.Store({
     decodedAuthToken:     state => state.decodedAuthToken,
     notifications:        state => state.notifications,
     user:                 state => state.user,
-    flashNotification:    state => state.flashNotification
+    flashNotification:    state => state.flashNotification,
+    isSubmitting:         state => state.isSubmitting
   }
 });
 

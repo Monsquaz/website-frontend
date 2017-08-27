@@ -16,6 +16,7 @@
         <div
           class="navbar-item"
           v-for="item in menuItemsTreeMerged"
+          v-bind:key="item.id"
           v-bind:class="{
             'has-dropdown': item.children,
             'is-hoverable': item.children
@@ -25,22 +26,23 @@
             <router-link
               class="navbar-link"
               v-for="subitem in item.children"
+              v-bind:key="subitem.id"
               v-bind:to="subitem.page.slug['en']">
               {{ subitem.title['en'] }}
             </router-link>
           </div>
         </div>
       </div>
-      <div v-if="!user" class="navbar-end">
-        <router-link class="navbar-item" to="login">Login</router-link>
-        <router-link class="navbar-item" to="register">Register</router-link>
-      </div>
-      <div v-if="user" class="navbar-end">
-        <router-link class="navbar-item" to="profile">
+
+      <div class="navbar-end">
+        <site-search />
+        <router-link v-if="!user" class="navbar-item" to="login">Login</router-link>
+        <router-link v-if="!user" class="navbar-item" to="register">Register</router-link>
+        <router-link v-if="user" class="navbar-item" to="profile">
           <img class="gravatar" v-bind:src="user.gravatar" />
           {{ user.name }}
         </router-link>
-        <a class="navbar-item" v-on:click.stop="logout">Logout</a>
+        <a  v-if="user" class="navbar-item" v-on:click.stop="logout">Logout</a>
       </div>
     </div>
   </nav>
