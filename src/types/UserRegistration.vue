@@ -11,9 +11,9 @@
               class="input"
               :disabled="isSubmitting"
               :class="{'is-danger': errors.has('name') }"
-              v-validate="name"
-              data-vv-rules="required|alpha_dash"
+              v-validate="'required|alpha_dash'"
               v-model="name"
+              name="name"
               type="text"
               placeholder="Username">
           </p>
@@ -25,9 +25,9 @@
               class="input"
               :disabled="isSubmitting"
               :class="{'is-danger': errors.has('email') }"
-              v-validate="email"
-              data-vv-rules="required|email"
+              v-validate="'required|email'"
               v-model="email"
+              name="email"
               type="email"
               placeholder="Email">
           </p>
@@ -39,9 +39,9 @@
               class="input"
               :disabled="isSubmitting"
               :class="{'is-danger': errors.has('firstname') }"
-              v-validate="firstname"
-              data-vv-rules="required|alpha_num"
+              v-validate="'required|alpha_num'"
               v-model="firstname"
+              name="firstname"
               type="text"
               placeholder="First name">
           </p>
@@ -53,9 +53,9 @@
               class="input"
               :disabled="isSubmitting"
               :class="{'is-danger': errors.has('lastname') }"
-              v-validate="lastname"
-              data-vv-rules="required|alpha_num"
+              v-validate="'required|alpha_num'"
               v-model="lastname"
+              name="lastname"
               type="text"
               placeholder="Last name">
           </p>
@@ -67,9 +67,9 @@
               class="input"
               :disabled="isSubmitting"
               :class="{'is-danger': errors.has('password') }"
-              v-validate="password"
-              data-vv-rules="required|password"
+              v-validate="'required|password'"
               v-model="password"
+              name="password"
               type="password"
               placeholder="Password">
           </p>
@@ -80,7 +80,9 @@
             <input
               class="input"
               :disabled="isSubmitting"
+              v-validate="'confirmed:password'"
               v-model="password2"
+              name="password2"
               type="password"
               placeholder="Password (repeat)">
           </p>
