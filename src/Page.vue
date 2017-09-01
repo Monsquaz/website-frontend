@@ -39,12 +39,19 @@ const Page = {
           return gql`query ($path: String!) {
             pages(path: $path) {
               id,
+              images { url },
               category {
                 title {
                   lang
                   content
                 }
               },
+              author {
+                id,
+                name,
+                gravatar
+              },
+              publishDate,
               categoriesBreadcrumbs {
                 id, depth, ancestor {
                   id, title {

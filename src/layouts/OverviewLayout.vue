@@ -28,7 +28,15 @@
           <div class="columns">
             <div class="column is-12 type-content">
               <breadcrumbs v-bind:page="page" class="breadcrumbs"></breadcrumbs>
-              <h1 class="page-title">{{ title }}</h1>
+              <div class="page-title">
+                <h1 class="h1">{{ title }}</h1>
+                <div class="meta">
+                  <img v-if="page.author" class="gravatar" v-bind:src="page.author.name + '?s=32'" />
+                  <span v-if="page.author" class="author">{{ page.author.name }}</span>
+                  <span class="date">{{ publishDate }}</span>
+                </div>
+              </div>
+              <img class="img" v-if="page.images[0]" v-bind:src="page.images[0].url" />
               <component
               :is="page.typeView.type.component"
               v-bind:page="page" />
@@ -42,7 +50,10 @@
             v-bind:data="component.data" />
           <div class="columns" v-if="page.comments">
             <div class="column is-12 comments" >
-              <h2 class="sub-heading">Comments</h2>
+              <div class="sub-heading">
+                <h2 class="h2">Comments</h2>
+                <div class="meta"></div>
+              </div>
               <disqus
                 class="disqus"
                 shortname="monsquaz"
@@ -84,6 +95,10 @@ const OverviewLayout = {
   },
   computed: {
     ...mapGetters(['flashNotification']),
+    publishDate: function() {
+      if(!this.page) return null;
+      return (new Date(this.page.publishDate)).toISOString().split('T')[0];
+    },
     horizontalMenu: function(){
       return this.layoutData.horizontalMenu;
     },
@@ -119,8 +134,8 @@ export default OverviewLayout ;
 
 <style lang="sass" scoped>
   %blob {
-    background-color: #ffffff;
-    opacity: 0.9;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* opacity: 0.9; */
     border-radius: 5px;
     border: 1px solid #c0c0c0;
     box-shadow: 2px 2px 3px 0 rgba(0,0,0,.75);
@@ -136,6 +151,9 @@ export default OverviewLayout ;
   }
   .center-component {
     @extend %blob;
+    &:not(:first-child) {
+      margin-top: 12px;
+    }
   }
   .right-component {
     @extend %blob;
@@ -183,15 +201,32 @@ export default OverviewLayout ;
     padding-bottom: 15px;
   }
   %heading {
-    font-size: 30px;
     border-bottom: 1px solid #c0c0c0;
     margin-bottom: 15px;
   }
+
   .page-title {
     @extend %heading;
+    .h1 {
+      font-size: 1.9em;
+      display: inline;
+    }
+    .meta {
+      float: right;
+      margin-top: 1px;
+    }
   }
+
   .sub-heading {
     @extend %heading;
+    .h2 {
+      font-size: 1.9em;
+      display: inline;
+    }
+    .meta {
+      float: right;
+      margin-top: 1px;
+    }
   }
   .breadcrumbs {
 
@@ -202,7 +237,7 @@ export default OverviewLayout ;
   .comments {
     @extend %blob;
     @extend %center-content;
-    margin-top: 15px;
+    margin-top: 25px;
   }
   .disqus {
     padding-left: 10px;

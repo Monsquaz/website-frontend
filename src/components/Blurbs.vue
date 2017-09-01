@@ -1,7 +1,7 @@
 <template>
   <div class="blurbs">
     <div class="columns">
-      <div v-for="blurb in data.blurbs" class="column">
+      <div v-for="blurb in data.blurbs" class="c column">
         <div class="blurb">
           <router-link class="link" v-bind:to="'/'+blurb['en'].pageId">
             <icon class="icon" v-bind:name="blurb['en'].icon || 'eye'"></icon>
@@ -45,7 +45,7 @@ export default Blurbs;
     padding-top: 10px;
     padding-bottom: 5px;
   }
-  .column:not(:first-child) {
+  .c:not(:first-child) {
     .blurb {
       border-left: 1px solid #c0c0c0;
       height: 100%;
