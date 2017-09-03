@@ -19,6 +19,7 @@ var router = new VueRouter({
     }
   ]
 });
+console.warn('TEST', router)
 export default {
   name: 'app',
   router

@@ -6,6 +6,11 @@
           <div class="teaser">
             <router-link class="link" v-bind:to="'/'+page.id">
               <h3 class="h3">{{ page.title['en'] }}</h3>
+              <div class="meta">
+                <img v-if="page.author" class="gravatar" v-bind:src="page.author.gravatar + '?s=32'" />
+                <span v-if="page.author" class="author">{{ page.author.name }}</span>
+                <span class="date">{{ formatDate(page.publishDate) }}</span>
+              </div>
               <img class="img" v-if="page.images[0]" v-bind:src="page.images[0].url" />
               <p class="content">{{ page.teaser['en'] }}</p>
             </router-link>
@@ -60,6 +65,12 @@ const PageTeasers = {
       return result;
     }
   },
+  methods: {
+    formatDate: function(d){
+      if(!d) return null;
+      return (new Date(d)).toISOString().split('T')[0];
+    }
+  },
   apollo: {
     relatedPages () {
       return {
@@ -74,6 +85,18 @@ const PageTeasers = {
                 },
                 teaser {
                   lang, content
+                },
+                publishDate,
+                author {
+                  id,
+                  name,
+                  gravatar,
+                  page {
+                    paths {
+                      lang,
+                      path
+                    }
+                  }
                 }
               }
             }

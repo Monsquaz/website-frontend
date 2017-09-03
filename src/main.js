@@ -72,6 +72,11 @@ Vue.component('faq', () => import(
   './types/FAQ.vue'
 ));
 
+Vue.component('admin-browser', () => import(
+  /* webpackChunkName: "admin-browser" */
+  './types/AdminBrowser.vue'
+));
+
 /* Other components       */
 /* ---------------------- */
 //import 'vue-awesome/icons'; // TODO: We don't have to import all.
@@ -116,14 +121,14 @@ Vue.component('notification', () => import(
   './components/Notification.vue'
 ));
 
-Vue.component('admin-browser', () => import(
-  /* webpackChunkName: "admin-browser" */
-  './components/AdminBrowser.vue'
+Vue.component('admin-action-list', () => import(
+  /* webpackChunkName: "admin-action-list" */
+  './components/AdminActionList.vue'
 ));
 
-Vue.component('admin-actions', () => import(
-  /* webpackChunkName: "admin-actions" */
-  './components/AdminActions.vue'
+Vue.component('admin-action', () => import(
+  /* webpackChunkName: "admin-action" */
+  './components/AdminAction.vue'
 ));
 
 Vue.component('blurbs', () => import(
@@ -160,13 +165,14 @@ Vue.use(VueRouter);
 Vue.use(VueApollo);
 Vue.use(Vuex);
 
+import store from './store';
 import monsquazApolloClient from './MonsquazApolloClient';
 
 const apolloProvider = new VueApollo({
   defaultClient: monsquazApolloClient
 });
 
-import store from './store';
+
 import { mapGetters } from 'vuex';
 
 new Vue({

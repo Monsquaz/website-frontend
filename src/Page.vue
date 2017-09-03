@@ -17,6 +17,7 @@ import Config from '../config';
 let reactToRouteChange = (instance, from, to) => {
   instance.path = to.path;
   instance.skipQuery = false;
+  instance.$store.dispatch('setLocationInfo', to);
   instance.$store.dispatch('clearOldFlashNotification');
 }
 
@@ -49,7 +50,13 @@ const Page = {
               author {
                 id,
                 name,
-                gravatar
+                gravatar,
+                page {
+                  paths {
+                    lang,
+                    path
+                  }
+                }
               },
               publishDate,
               categoriesBreadcrumbs {

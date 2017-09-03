@@ -1,7 +1,6 @@
 <template>
   <div class="type-view">
     <p>{{ content }}</p>
-    <admin-browser />
   </div>
 </template>
 

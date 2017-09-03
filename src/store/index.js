@@ -9,20 +9,34 @@ import jwtDecode from 'jwt-decode';
 Vue.use(Vuex);
 
 let authToken = localStorage.getItem("authToken");
+let decodedAuthToken = authToken ? jwtDecode(localStorage.getItem("authToken")) : null;
 
 const store = new Vuex.Store({
   state: {
     authToken,
-    decodedAuthToken: authToken ? jwtDecode(localStorage.getItem("authToken")) : null,
+    decodedAuthToken,
+    loginExpirationTimeout: authToken ? setTimeout(
+      function() {
+        store.dispatch('logout', 'Login session has expired');
+      },
+      Math.max(0, 1000 * decodedAuthToken.exp - Math.floor((new Date()).getTime()))
+    ) : null,
     user: null,
     page: null,
     isSubmitting: false,
     notifications: [],
     flashNotification: null,
     flashNotificationTime: null,
+    locationInfo: 'test',
     apollo: monsquazApolloClient
   },
   mutations: {
+    RESET_LOGIN_EXPIRATION_TIMER(state, {cb, time}) {
+      if(state.loginExpirationTimeout) {
+        clearTimeout(state.loginExpirationTimeout);
+      }
+      state.loginExpirationTimeout = setTimeout(cb, time);
+    },
     SET_AUTH_TOKEN(state, {authToken, decodedAuthToken}) {
       state.authToken = authToken;
       state.decodedAuthToken = decodedAuthToken;
@@ -46,19 +60,26 @@ const store = new Vuex.Store({
     SET_PAGE(state, page) {
       state.page = page;
     },
+    SET_LOCATION_INFO(state, locationInfo) {
+      state.locationInfo = locationInfo;
+    },
     LOGOUT(state) {
       state.authToken = null;
       state.decodedAuthToken = null;
       state.user = null;
+      if(state.loginExpirationTimeout) {
+        clearTimeout(state.loginExpirationTimeout);
+      }
     }
   },
   actions: {
-    logout({dispatch, commit, state})  {
+    logout({dispatch, commit, state}, message)  {
+      message = message || `You've been logged out.`;
       localStorage.removeItem("authToken");
       commit('LOGOUT');
       dispatch('setFlashNotification', {
         type: 'info',
-        content: `You've been logged out.`
+        content: message
       });
     },
     loadUser: async ({commit, state, rootState}, userId) => {
@@ -98,6 +119,12 @@ const store = new Vuex.Store({
           });
           let authToken = loginResponse.data.login.token;
           let decodedAuthToken = jwtDecode(authToken);
+          commit('RESET_LOGIN_EXPIRATION_TIMER', {
+            cb: function() {
+              store.dispatch('logout', 'Login session has expired'); 
+            },
+            time: 1000 * decodedAuthToken.exp - Math.floor((new Date()).getTime())
+          });
           dispatch('loadUser', decodedAuthToken.userId);
           localStorage.setItem("authToken", authToken);
           commit('SET_AUTH_TOKEN', {authToken, decodedAuthToken});
@@ -115,6 +142,9 @@ const store = new Vuex.Store({
         }
         commit('SET_IS_SUBMITTING', false);
         return result;
+    },
+    setLocationInfo({commit}, locationInfo) {
+      commit('SET_LOCATION_INFO', locationInfo);
     },
     setPage({commit}, page) {
       commit('SET_PAGE', page);
@@ -140,7 +170,8 @@ const store = new Vuex.Store({
     notifications:        state => state.notifications,
     user:                 state => state.user,
     flashNotification:    state => state.flashNotification,
-    isSubmitting:         state => state.isSubmitting
+    isSubmitting:         state => state.isSubmitting,
+    locationInfo:         state => state.locationInfo
   }
 });
 

@@ -31,7 +31,7 @@
               <div class="page-title">
                 <h1 class="h1">{{ title }}</h1>
                 <div class="meta">
-                  <img v-if="page.author" class="gravatar" v-bind:src="page.author.name + '?s=32'" />
+                  <img v-if="page.author" class="gravatar" v-bind:src="page.author.gravatar + '?s=32'" />
                   <span v-if="page.author" class="author">{{ page.author.name }}</span>
                   <span class="date">{{ publishDate }}</span>
                 </div>
